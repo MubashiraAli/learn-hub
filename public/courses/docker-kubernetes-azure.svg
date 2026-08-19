@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  <rect x="200" y="150" width="120" height="80" rx="8" fill="white" opacity="0.18"/>
+  <rect x="220" y="160" width="80" height="10" rx="2" fill="white" opacity="0.25"/>
+  <rect x="350" y="180" width="120" height="80" rx="8" fill="white" opacity="0.15"/>
+  <rect x="370" y="190" width="80" height="10" rx="2" fill="white" opacity="0.22"/>
+  <rect x="500" y="150" width="120" height="80" rx="8" fill="white" opacity="0.18"/>
+  <rect x="520" y="160" width="80" height="10" rx="2" fill="white" opacity="0.25"/>
+  <rect x="200" y="280" width="120" height="80" rx="8" fill="white" opacity="0.15"/>
+  <rect x="350" y="310" width="120" height="80" rx="8" fill="white" opacity="0.18"/>
+  <rect x="500" y="280" width="120" height="80" rx="8" fill="white" opacity="0.15"/>
+  <path d="M320 190 L350 210 M470 210 L500 190" stroke="white" stroke-width="2" opacity="0.15"/>
+  <path d="M260 230 L260 280 M410 260 L410 310 M560 230 L560 280" stroke="white" stroke-width="2" opacity="0.12"/>
+  <path d="M320 320 L350 330 M470 330 L500 320" stroke="white" stroke-width="2" opacity="0.15"/>
+  <circle cx="100" cy="100" r="30" fill="white" opacity="0.06"/>
+  <circle cx="700" cy="100" r="30" fill="white" opacity="0.06"/>
+  <circle cx="100" cy="380" r="30" fill="white" opacity="0.06"/>
+  <circle cx="700" cy="380" r="30" fill="white" opacity="0.06"/>
+  <path d="M50 50 L80 50 L80 80 M720 50 L750 50 L750 80 M50 400 L80 400 L80 370 M720 400 L750 400 L750 370" stroke="white" stroke-width="2" opacity="0.1"/>
+</svg>

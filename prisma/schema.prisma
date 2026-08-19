@@ -1,0 +1,252 @@
+// LearnHub — PostgreSQL schema
+//
+// Catalog ids (course slug "aws-cloud-practitioner", module "m1", lesson "l1")
+// are only unique *within* their parent — every course reuses m1..m3 and
+// l1..l9. Modules, lessons and questions therefore carry a generated primary
+// key plus a `slug` that is unique per parent. `lib/dto.ts` maps rows back to
+// the slug-based shapes the UI already expects, so no component changes.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Auth ────────────────────────────────────────────────────────────
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id           String  @id @default(cuid())
+  name         String
+  email        String  @unique
+  passwordHash String
+  role         Role    @default(USER)
+
+  // Profile
+  avatarUrl String?
+  title     String?
+  phone     String?
+  address   String?
+  city      String?
+  state     String?
+  country   String?
+  bio       String?
+  skills    String[] @default([])
+
+  // "Continue where you left off" — the course last opened by this user.
+  lastCourseId String?
+
+  memberSince DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  sessions     Session[]
+  enrollments  Enrollment[]
+  progress     Progress[]
+  quizAttempts QuizAttempt[]
+  certificates Certificate[]
+
+  @@index([createdAt])
+  @@index([role])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+// ─── Catalog ─────────────────────────────────────────────────────────
+
+model Course {
+  id               String   @id // slug, e.g. "aws-cloud-practitioner"
+  title            String
+  description      String
+  category         String
+  level            String
+  instructorId     String
+  durationHours    Int
+  rating           Float
+  studentsCount    Int
+  price            Int
+  originalPrice    Int?
+  language         String
+  tags             String[] @default([])
+  learningOutcomes String[] @default([])
+  requirements     String[] @default([])
+  imageUrl         String?
+  updatedAt        DateTime
+  createdAt        DateTime @default(now())
+
+  modules      Module[]
+  quiz         Quiz?
+  enrollments  Enrollment[]
+  progress     Progress[]
+  quizAttempts QuizAttempt[]
+  certificates Certificate[]
+
+  @@index([category])
+  @@index([level])
+  @@index([category, level])
+}
+
+model Module {
+  id       String @id @default(cuid())
+  slug     String // "m1" — unique within the course only
+  title    String
+  position Int
+  courseId String
+
+  course  Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons Lesson[]
+
+  @@unique([courseId, slug])
+  @@index([courseId, position])
+}
+
+model Lesson {
+  id              String  @id @default(cuid())
+  slug            String // "l1" — unique within the module only
+  title           String
+  description     String
+  type            String // video | article | exercise
+  durationMinutes Int
+  position        Int
+  videoUrl        String?
+  moduleId        String
+
+  module    Module           @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  resources LessonResource[]
+  progress  Progress[]
+
+  @@unique([moduleId, slug])
+  @@index([moduleId, position])
+}
+
+model LessonResource {
+  id       String @id @default(cuid())
+  slug     String
+  title    String
+  url      String
+  kind     String // pdf | code | link
+  position Int
+  lessonId String
+
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([lessonId, slug])
+  @@index([lessonId, position])
+}
+
+model Quiz {
+  id        String @id @default(cuid())
+  slug      String @unique // "quiz-aws-cp"
+  courseId  String @unique // one quiz per course
+  title     String
+  passScore Int    @default(70)
+
+  course    Course        @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  questions Question[]
+  attempts  QuizAttempt[]
+}
+
+model Question {
+  id           String   @id @default(cuid())
+  slug         String // "q1" — unique within the quiz only
+  prompt       String
+  options      String[]
+  correctIndex Int
+  position     Int
+  quizId       String
+
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@unique([quizId, slug])
+  @@index([quizId, position])
+}
+
+// ─── Learner activity ────────────────────────────────────────────────
+
+model Enrollment {
+  id       String @id @default(cuid())
+  userId   String
+  courseId String
+
+  progress        Int       @default(0) // 0–100, denormalised for list views
+  currentLessonId String? // Lesson.id of the lesson last opened
+  startedAt       DateTime  @default(now())
+  completedAt     DateTime?
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+  @@index([userId])
+  @@index([courseId])
+}
+
+model Progress {
+  id             String    @id @default(cuid())
+  userId         String
+  courseId       String
+  lessonId       String
+  completed      Boolean   @default(false)
+  completedAt    DateTime?
+  lastAccessedAt DateTime  @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@index([userId, courseId])
+  @@index([lessonId])
+}
+
+model QuizAttempt {
+  id             String   @id @default(cuid())
+  userId         String
+  quizId         String
+  courseId       String
+  score          Int
+  correctCount   Int
+  totalQuestions Int
+  passed         Boolean
+  completedAt    DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz   Quiz   @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@index([userId, courseId])
+  @@index([quizId])
+  @@index([completedAt])
+}
+
+model Certificate {
+  id       String   @id @default(cuid())
+  userId   String
+  courseId String
+  score    Int
+  issuedAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+  @@index([userId])
+  @@index([courseId])
+}

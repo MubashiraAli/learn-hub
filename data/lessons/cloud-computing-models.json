@@ -1,0 +1,1760 @@
+{
+  "id": "vs-aws-cp-m1-l1",
+  "courseId": "aws-cloud-practitioner",
+  "moduleId": "m1",
+  "moduleTitle": "Cloud Concepts",
+  "lessonId": "l1",
+  "lessonTitle": "Cloud Computing Models",
+  "subtitle": "IaaS, PaaS and SaaS explained for the AWS Cloud Practitioner exam",
+  "audience": "Beginners preparing for the AWS Cloud Practitioner (CLF-C02) certification. No prior cloud or IT experience assumed.",
+  "totalDurationSeconds": 1440,
+  "renderSpec": {
+    "resolution": "1920x1080",
+    "fps": 30,
+    "aspectRatio": "16:9",
+    "safeAreaPaddingPx": 96,
+    "backgroundMusic": "none",
+    "theme": {
+      "name": "Clean blue / white cloud technology",
+      "colors": {
+        "background": "#FFFFFF",
+        "backgroundAlt": "#F6F9FD",
+        "gridLines": "#D3E0EF",
+        "ink": "#08192B",
+        "inkSecondary": "#3D5B76",
+        "inkMuted": "#7D95AC",
+        "primary": "#0B5FCE",
+        "primaryDeep": "#0A3D82",
+        "primarySoft": "#E3EDFB",
+        "iaas": "#1F6FE0",
+        "paas": "#0C8C99",
+        "saas": "#6A55D3",
+        "customerManaged": "#E8EEF4",
+        "customerManagedInk": "#43607A",
+        "warning": "#C0770B",
+        "warningSoft": "#FBF0DC",
+        "correct": "#0E7F58",
+        "incorrect": "#C23B2D"
+      },
+      "fonts": {
+        "display": "Archivo SemiBold / Bold — headings, section titles, diagram column headers",
+        "body": "Source Sans 3 Regular / SemiBold — body copy, bullets, captions",
+        "mono": "IBM Plex Mono Medium — layer labels, chips, timecodes, data"
+      },
+      "motion": {
+        "sceneTransition": "0.5s crossfade with a 12px upward drift on incoming content",
+        "sectionTransition": "0.7s horizontal wipe from left, primary colour sweep bar",
+        "buildIn": "0.45s ease-out, 120ms stagger between sibling elements",
+        "easing": "cubic-bezier(0.2, 0.7, 0.3, 1)",
+        "rule": "Nothing moves during the last 1.5s of a scene — the frame settles before the cut."
+      }
+    },
+    "voiceOver": {
+      "style": "Professional instructor. Warm, measured, confident. Explaining to one beginner, not lecturing a hall.",
+      "pace": "Approximately 110 words per minute across spoken scenes. Measured and unhurried — every scene is written with headroom so the read never rushes an animation.",
+      "direction": [
+        "Land a clear beat before and after every defined term.",
+        "Lift slightly on the three model names; they are the spine of the lesson.",
+        "Read the definition in section 2 slowly enough for a learner to write it down.",
+        "Quiz questions: read the stem, pause, then read options A to D at an even pace.",
+        "No vocal fry at line ends. No upward inflection on statements."
+      ],
+      "pronunciation": {
+        "IaaS": "eye-as (one syllable 'eye' + 'as')",
+        "PaaS": "pass",
+        "SaaS": "sass",
+        "EC2": "E-C-two",
+        "CapEx": "cap-ex",
+        "OpEx": "op-ex"
+      }
+    },
+    "captions": {
+      "required": true,
+      "format": "WebVTT",
+      "source": "The narration field of every scene, verbatim."
+    }
+  },
+  "sections": [
+    {
+      "number": 1,
+      "title": "Introduction to cloud computing",
+      "startSeconds": 0,
+      "durationSeconds": 68,
+      "scenes": [
+        {
+          "id": "s01-01",
+          "startSeconds": 0,
+          "durationSeconds": 14,
+          "narration": "Welcome to Cloud Computing Models, part of your AWS Cloud Practitioner certification course. Over the next twenty-four minutes we'll make an abstract topic concrete, practical, and exam-ready.",
+          "onScreen": {
+            "heading": "Cloud Computing Models",
+            "subheading": "AWS Cloud Practitioner · Module 1 · Cloud Concepts",
+            "bullets": [
+              "IaaS",
+              "PaaS",
+              "SaaS"
+            ]
+          },
+          "visual": "Title card. White ground with a faint blue grid, masked to a soft radial fade. A pale blue glow sits behind the upper-right corner. Title set large in navy display type, left-aligned on the safe-area margin. The three model names run beneath it in mono caps, separated by small dot dividers.",
+          "animation": "Fade up from white over 0.6s. Title rises 24px into place. The three model names stagger in at 120ms intervals, each with a short blue underline that draws left to right."
+        },
+        {
+          "id": "s01-02",
+          "startSeconds": 14,
+          "durationSeconds": 18,
+          "narration": "Here's the honest truth about this exam. Cloud computing models come up again and again, and most beginners lose marks not because the ideas are hard, but because nobody ever showed them a clear picture.",
+          "onScreen": {
+            "heading": "Why this lesson matters",
+            "bullets": [
+              "Cloud models appear throughout the CLF-C02 exam",
+              "Most mistakes come from an unclear mental model",
+              "One diagram fixes it"
+            ]
+          },
+          "visual": "The title lockup shrinks and docks to the top-left as a persistent lesson label. Three bullet rows occupy the centre-left; the right third stays empty white so the frame breathes.",
+          "animation": "Title lockup scales to 40% and moves to the corner over 0.6s. Bullets slide in from the left with a 140ms stagger, each preceded by a small blue tick that draws itself."
+        },
+        {
+          "id": "s01-03",
+          "startSeconds": 32,
+          "durationSeconds": 20,
+          "narration": "So that's what we'll build today. One picture, one stack of layers, and a simple question you can ask yourself: who manages what? Answer that, and Infrastructure as a Service, Platform as a Service, and Software as a Service stop being jargon.",
+          "onScreen": {
+            "heading": "What you'll learn",
+            "callout": "Who manages what?"
+          },
+          "visual": "Left half: a ghosted silhouette of the nine-layer responsibility stack assembles from the bottom upward in pale blue outline — no labels yet, just the shape the learner will see repeatedly. Right half: the question 'Who manages what?' set large in navy display type.",
+          "animation": "Stack layers rise into place bottom-to-top, 90ms apart, each fading from 0 to 100% opacity. The question types on character by character at 28 characters per second, finishing 3s before the cut."
+        },
+        {
+          "id": "s01-04",
+          "startSeconds": 52,
+          "durationSeconds": 16,
+          "narration": "No prior technical background is needed. If you've ever rented a car, moved into a furnished apartment, or streamed a film, you already understand more about the cloud than you think. Let's begin.",
+          "onScreen": {
+            "heading": "No prior experience required",
+            "bullets": [
+              "Renting a car",
+              "A furnished apartment",
+              "Streaming a film"
+            ]
+          },
+          "visual": "Three evenly spaced line-art icons on white — a car, an apartment block, a play triangle inside a screen — each in a soft blue rounded tile with its label in mono caps beneath.",
+          "animation": "Tiles pop in with a 1.04 overshoot scale, 160ms apart, timed to land on the three nouns in the narration."
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "What is cloud computing?",
+      "startSeconds": 68,
+      "durationSeconds": 110,
+      "scenes": [
+        {
+          "id": "s02-01",
+          "startSeconds": 68,
+          "durationSeconds": 14,
+          "narration": "Let's start with the definition AWS itself uses, because that's the wording the exam is built around. Read it with me.",
+          "onScreen": {
+            "heading": "What is cloud computing?",
+            "subheading": "Section 2"
+          },
+          "visual": "Section transition card: a full-height blue bar sweeps across the frame from the left, depositing the section number and title, then continues off-screen to reveal the white content ground. An empty navy definition panel slides up from the lower third, ready to receive text.",
+          "animation": "Wipe bar travels across in 0.7s. Definition panel rises 40px and settles with a soft shadow over 0.5s."
+        },
+        {
+          "id": "s02-02",
+          "startSeconds": 82,
+          "durationSeconds": 17,
+          "narration": "Cloud computing is the on-demand delivery of IT resources over the internet, with pay-as-you-go pricing. Three ideas are hiding in that one sentence, and each one matters.",
+          "onScreen": {
+            "heading": "The definition",
+            "callout": "Cloud computing is the on-demand delivery of IT resources over the internet, with pay-as-you-go pricing.",
+            "bullets": [
+              "on-demand",
+              "over the internet",
+              "pay-as-you-go"
+            ]
+          },
+          "visual": "A wide navy panel holds the definition in large white display type. Three phrases within it — 'on-demand', 'over the internet', 'pay-as-you-go' — are set in light blue.",
+          "animation": "The sentence types in at reading pace, synced to the narration. As the voice reaches each of the three phrases, a light-blue underline sweeps beneath it and stays lit."
+        },
+        {
+          "id": "s02-03",
+          "startSeconds": 99,
+          "durationSeconds": 18,
+          "narration": "First: on-demand. You request a server, a database, or storage, and you get it in minutes — no purchase order, no waiting for hardware to arrive on a loading dock.",
+          "onScreen": {
+            "heading": "1 · On-demand",
+            "keyTerm": {
+              "term": "On-demand",
+              "definition": "Resources are provisioned the moment you ask for them — minutes, not weeks."
+            }
+          },
+          "visual": "The definition panel shrinks to a slim reference strip along the top. Below it, a simplified console UI: a 'Launch instance' button, a cursor moving to it, then a server tile appearing with a countdown reading 00:58 that ticks down.",
+          "animation": "Cursor travels and clicks at 4s. Server tile scales in from 0.9 with a blue ring pulse. The lower-left keyword card slides up and holds for the remainder of the scene."
+        },
+        {
+          "id": "s02-04",
+          "startSeconds": 117,
+          "durationSeconds": 18,
+          "narration": "Second: over the internet. The physical machines live in someone else's building — an AWS data center — and you reach them through a browser, a command line, or code.",
+          "onScreen": {
+            "heading": "2 · Over the internet"
+          },
+          "visual": "A three-node flow diagram across the frame: on the left, an AWS Region block containing stacked server racks; in the centre, a labelled 'Internet' connector; on the right, three client icons stacked vertically — a browser window, a terminal prompt, and a code file.",
+          "animation": "Nodes fade in left to right. Small blue dots travel continuously along the connector in both directions at 1.5s per traverse, establishing the data flow. Client icons pulse gently as dots arrive."
+        },
+        {
+          "id": "s02-05",
+          "startSeconds": 135,
+          "durationSeconds": 20,
+          "narration": "Third: pay-as-you-go. You pay for what you actually use, like electricity. Turn a server off and the meter stops. Nobody bills you for an idle machine sitting in a rack.",
+          "onScreen": {
+            "heading": "3 · Pay-as-you-go",
+            "keyTerm": {
+              "term": "Pay-as-you-go",
+              "definition": "You are billed only for the resources you actually consume, with no long-term commitment."
+            }
+          },
+          "visual": "Left: a running server tile with a green status dot. Right: a circular usage meter with a needle, and beneath it a cost counter climbing in dollars and cents.",
+          "animation": "Counter climbs steadily for the first 8s. At 10s the server toggles to off and greys out; the needle falls smoothly to zero over 1.2s and the cost counter freezes — the frozen number stays on screen to the cut."
+        },
+        {
+          "id": "s02-06",
+          "startSeconds": 155,
+          "durationSeconds": 23,
+          "narration": "Here's the everyday version. You don't build a power station to boil a kettle. You plug into a grid somebody else runs, and you pay for the units you consume. Cloud computing is that same idea, applied to computing power.",
+          "onScreen": {
+            "heading": "The everyday version",
+            "callout": "You don't build a power station to boil a kettle."
+          },
+          "visual": "A warm amber analogy band spans the lower two-thirds — the only non-blue moment so far, marking 'this is an analogy, not a fact to memorise'. Inside it, four line icons connected by a wire: power station → pylon → wall socket → kettle.",
+          "animation": "The amber band wipes in from the left. Icons appear in sequence along the wire as the narration names them; a small pulse of light travels the full wire on the word 'consume'."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Why organizations use cloud computing",
+      "startSeconds": 178,
+      "durationSeconds": 100,
+      "scenes": [
+        {
+          "id": "s03-01",
+          "startSeconds": 178,
+          "durationSeconds": 16,
+          "narration": "So why did organizations of every size move this way? It comes down to five pressures that traditional IT struggled to answer.",
+          "onScreen": {
+            "heading": "Why organizations use cloud computing",
+            "subheading": "Section 3"
+          },
+          "visual": "Section transition, then an empty 3-by-2 grid of card outlines in pale blue dashes — the learner can see five slots waiting to be filled, which sets the expectation of a list.",
+          "animation": "Wipe transition 0.7s. Card outlines draw in as dashed strokes, 80ms apart."
+        },
+        {
+          "id": "s03-02",
+          "startSeconds": 194,
+          "durationSeconds": 17,
+          "narration": "Speed. A new project used to wait weeks for hardware to be ordered, delivered, racked and configured. In the cloud, the environment is ready before the kickoff meeting ends.",
+          "onScreen": {
+            "heading": "1 · Speed",
+            "bullets": [
+              "Weeks of procurement → minutes of provisioning"
+            ]
+          },
+          "visual": "Card 1 fills: a stopwatch icon in a soft blue tile, the title 'Speed', and one supporting line. A small before/after strip inside the card shows '6–12 weeks' struck through and '~5 minutes' in blue.",
+          "animation": "Card fades from dashed outline to solid white with a border, rising 12px. The strike-through line draws across '6–12 weeks' as the narration says 'used to wait weeks'."
+        },
+        {
+          "id": "s03-03",
+          "startSeconds": 211,
+          "durationSeconds": 17,
+          "narration": "Cost shape. Buying servers is a large payment up front for capacity you hope you'll need. Renting turns that into a smaller, predictable operating expense you can switch off.",
+          "onScreen": {
+            "heading": "2 · Cost shape",
+            "bullets": [
+              "One large upfront purchase → a smaller recurring bill you control"
+            ]
+          },
+          "visual": "Card 2 fills. Inside it, two miniature bar shapes: a single tall bar labelled 'Upfront' beside a row of short even bars labelled 'Monthly'.",
+          "animation": "Card fades in. The tall bar shrinks and redistributes into the row of short bars over 1.1s as the narration reaches 'Renting turns that into'."
+        },
+        {
+          "id": "s03-04",
+          "startSeconds": 228,
+          "durationSeconds": 17,
+          "narration": "Elasticity. A retailer's traffic on Black Friday is nothing like a Tuesday in February. Cloud capacity grows and shrinks to follow real demand, automatically.",
+          "onScreen": {
+            "heading": "3 · Elasticity",
+            "keyTerm": {
+              "term": "Elasticity",
+              "definition": "Capacity is added and removed automatically to match actual demand."
+            }
+          },
+          "visual": "Card 3 fills, containing a small sparkline with a dramatic spike, and a stack of server tiles beneath it that visibly multiplies at the spike and reduces afterwards.",
+          "animation": "Sparkline draws left to right over 2s. Server tiles duplicate outward at the peak, then fade back to the baseline count. Keyword card slides up bottom-left."
+        },
+        {
+          "id": "s03-05",
+          "startSeconds": 245,
+          "durationSeconds": 17,
+          "narration": "Reach. Opening in a new country used to mean building or renting a data center there. Now it's a configuration choice — pick a region, deploy, done.",
+          "onScreen": {
+            "heading": "4 · Reach",
+            "bullets": [
+              "Build a data center abroad → select an AWS Region"
+            ]
+          },
+          "visual": "Card 4 fills with a simplified world outline in pale blue and four Region pins.",
+          "animation": "Pins drop in one at a time with a small bounce and a ring pulse, 200ms apart, on the words 'pick a region, deploy, done'."
+        },
+        {
+          "id": "s03-06",
+          "startSeconds": 262,
+          "durationSeconds": 16,
+          "narration": "Focus. Every hour your team spends replacing failed disks is an hour not spent on the product your customers actually pay for.",
+          "onScreen": {
+            "heading": "5 · Focus",
+            "bullets": [
+              "Maintaining hardware → building the product"
+            ]
+          },
+          "visual": "Card 5 fills. The sixth grid slot stays empty, and the five completed cards hold together on screen for the final 4 seconds so the set reads as a whole.",
+          "animation": "Card fades in. At 12s all five cards receive a subtle simultaneous lift (2px) and their borders warm to primary blue for 0.4s, marking the completed set."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Traditional on-premises infrastructure",
+      "startSeconds": 278,
+      "durationSeconds": 115,
+      "scenes": [
+        {
+          "id": "s04-01",
+          "startSeconds": 278,
+          "durationSeconds": 16,
+          "narration": "To appreciate what the cloud changed, you need to see clearly what came before it. This is on-premises infrastructure — you own the building, the hardware, and every problem inside it.",
+          "onScreen": {
+            "heading": "Traditional on-premises infrastructure",
+            "subheading": "Section 4",
+            "keyTerm": {
+              "term": "On-premises",
+              "definition": "IT infrastructure that you own and operate inside your own facility."
+            }
+          },
+          "visual": "Section transition, then a clean isometric cutaway of a small office building. Inside, two rows of server racks with status LEDs; around it, an air-conditioning unit, a generator and a locked door.",
+          "animation": "Building draws in as an outline then fills. Rack LEDs begin a slow random blink. Keyword card slides up bottom-left at 6s."
+        },
+        {
+          "id": "s04-02",
+          "startSeconds": 294,
+          "durationSeconds": 20,
+          "narration": "You buy the servers, the storage arrays and the network gear. You pay for the room, the power, the cooling, the fire suppression and the physical security. And you hire the people who keep it all alive at three in the morning.",
+          "onScreen": {
+            "heading": "Everything is yours to buy and run",
+            "bullets": [
+              "Hardware — servers, storage, network",
+              "Facility — space, power, cooling, fire suppression",
+              "Security — locks, cameras, access control",
+              "People — staff on call around the clock"
+            ]
+          },
+          "visual": "The building shifts left. Four amber-tagged cost labels fly in and attach to it with thin leader lines, each pointing at the relevant part of the illustration.",
+          "animation": "Tags fly in from the right on a short arc, 400ms apart, landing exactly as the narration names each one. Each landing gives a small amber pulse along its leader line."
+        },
+        {
+          "id": "s04-03",
+          "startSeconds": 314,
+          "durationSeconds": 18,
+          "narration": "Then there's the lead time. Specify, get approval, order, wait for delivery, rack, cable, install the operating system, patch it. Six to twelve weeks is normal before a single line of your application runs.",
+          "onScreen": {
+            "heading": "Lead time before anything runs",
+            "callout": "6–12 weeks"
+          },
+          "visual": "A horizontal procurement timeline replaces the building. Eight labelled steps sit along a rail: Specify, Approve, Order, Deliver, Rack, Cable, Install OS, Patch. A bracket spans the whole rail reading '6–12 weeks'.",
+          "animation": "Steps illuminate one after another in time with the narration, each with a connecting segment drawing to the next. The bracket and its label appear last, at 14s."
+        },
+        {
+          "id": "s04-04",
+          "startSeconds": 332,
+          "durationSeconds": 16,
+          "narration": "But the hardest part is this chart. You must guess your capacity years in advance — and you will be wrong in one of two directions.",
+          "onScreen": {
+            "heading": "The capacity guess",
+            "keyTerm": {
+              "term": "Capacity planning",
+              "definition": "Forecasting how much hardware you will need, years before you can buy it."
+            }
+          },
+          "visual": "A single chart fills the frame. X axis: time. Y axis: capacity. A dashed navy step line shows purchased capacity rising in three discrete jumps. A solid blue curve shows actual demand rising unevenly, with two sharp spikes.",
+          "animation": "Axes draw first. The dashed capacity line steps in from the left over 1.5s. The demand curve then draws left to right over 2.5s. Legend appears beneath."
+        },
+        {
+          "id": "s04-05",
+          "startSeconds": 348,
+          "durationSeconds": 15,
+          "narration": "Guess too high and you've bought machines that sit idle, burning power and depreciating. That's wasted money you can never get back.",
+          "onScreen": {
+            "heading": "Guess too high",
+            "callout": "Paid for, never used"
+          },
+          "visual": "Same chart. The area between the dashed capacity line and the demand curve fills with translucent amber wherever capacity exceeds demand — a large, obvious wedge.",
+          "animation": "Amber fill sweeps in left to right over 1.2s. Its label 'Paid for, never used' fades in at the widest point of the wedge with a short leader line."
+        },
+        {
+          "id": "s04-06",
+          "startSeconds": 363,
+          "durationSeconds": 15,
+          "narration": "Guess too low and the site slows down or falls over on your busiest day — the one day the business genuinely could not afford it.",
+          "onScreen": {
+            "heading": "Guess too low",
+            "callout": "Outage · lost revenue"
+          },
+          "visual": "Same chart. At the two points where the demand curve crosses above the dashed capacity line, red markers appear with a short label 'Demand exceeds capacity'.",
+          "animation": "Markers scale in with a red ring pulse that repeats twice. The amber wedge dims to 40% so attention moves to the red crossings."
+        },
+        {
+          "id": "s04-07",
+          "startSeconds": 378,
+          "durationSeconds": 15,
+          "narration": "None of this makes on-premises wrong. Banks, hospitals and defense organizations still run it for good reasons. It's just expensive, slow to change, and unforgiving of a bad forecast.",
+          "onScreen": {
+            "heading": "On-premises is not wrong — it is rigid",
+            "bullets": [
+              "Still the right answer for some regulated workloads",
+              "Expensive · slow to change · unforgiving of a bad forecast"
+            ]
+          },
+          "visual": "The chart shrinks to a small reference thumbnail top-right. A balanced two-line summary occupies the centre-left, deliberately neutral in tone with no amber or red.",
+          "animation": "Chart scales down and docks over 0.6s. Summary lines fade in with a 200ms stagger. Frame settles and holds for the final 5s."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Advantages of cloud computing",
+      "startSeconds": 393,
+      "durationSeconds": 115,
+      "scenes": [
+        {
+          "id": "s05-01",
+          "startSeconds": 393,
+          "durationSeconds": 13,
+          "narration": "AWS summarizes the benefits as six advantages of cloud computing. These appear on the exam almost word for word, so let's take them one at a time.",
+          "onScreen": {
+            "heading": "Advantages of cloud computing",
+            "subheading": "Section 5 · The six advantages AWS names"
+          },
+          "visual": "Section transition into an empty 3-by-2 grid of card outlines, numbered 01 to 06 in mono type in each slot's top-left corner.",
+          "animation": "Wipe transition. Six numbered outlines draw in together over 0.5s."
+        },
+        {
+          "id": "s05-02",
+          "startSeconds": 406,
+          "durationSeconds": 17,
+          "narration": "One: trade capital expense for variable expense. Instead of a large payment for hardware you might need, you pay only for the computing you consume.",
+          "onScreen": {
+            "heading": "01 · Trade capital expense for variable expense",
+            "keyTerm": {
+              "term": "CapEx → OpEx",
+              "definition": "Capital expense is a large upfront purchase of assets. Operating expense is an ongoing cost that tracks usage."
+            }
+          },
+          "visual": "Card 01 fills with its title and one supporting line, and a blue accent rail down its left edge.",
+          "animation": "Card fades from outline to solid, rising 10px. Left accent rail wipes downward. Keyword card slides up bottom-left."
+        },
+        {
+          "id": "s05-03",
+          "startSeconds": 423,
+          "durationSeconds": 17,
+          "narration": "Two: benefit from massive economies of scale. Hundreds of thousands of customers share AWS's purchasing power, so the cost per unit is lower than you could ever achieve alone.",
+          "onScreen": {
+            "heading": "02 · Benefit from massive economies of scale",
+            "bullets": [
+              "Aggregate demand from many customers lowers the price per unit"
+            ]
+          },
+          "visual": "Card 02 fills. Card 01 remains but its accent rail dims to 40%, establishing the pattern for the rest of the section.",
+          "animation": "Card 02 fades in as above. Card 01's rail dims over 0.3s."
+        },
+        {
+          "id": "s05-04",
+          "startSeconds": 440,
+          "durationSeconds": 17,
+          "narration": "Three: stop guessing capacity. You no longer have to forecast years ahead and hope you got it right. Scale up when demand arrives, scale down when it leaves, and pay for neither in between.",
+          "onScreen": {
+            "heading": "03 · Stop guessing capacity",
+            "bullets": [
+              "Scale up when demand arrives, down when it leaves"
+            ]
+          },
+          "visual": "Card 03 fills. A miniature version of the section 4 capacity chart sits inside it — this time with the capacity line hugging the demand curve, no amber wedge.",
+          "animation": "Card fades in; the mini chart's capacity line animates from a stepped shape to a smooth match with the demand curve over 1s."
+        },
+        {
+          "id": "s05-05",
+          "startSeconds": 457,
+          "durationSeconds": 17,
+          "narration": "Four: increase speed and agility. Resources that took weeks now take minutes, so experimenting becomes cheap — and cheap experiments are how good products get found.",
+          "onScreen": {
+            "heading": "04 · Increase speed and agility",
+            "bullets": [
+              "Cheap experiments are how good products get found"
+            ]
+          },
+          "visual": "Card 04 fills, with a small 'weeks → minutes' strip inside it.",
+          "animation": "Card fades in. The word 'weeks' crossfades to 'minutes' at 8s."
+        },
+        {
+          "id": "s05-06",
+          "startSeconds": 474,
+          "durationSeconds": 17,
+          "narration": "Five: stop spending money running and maintaining data centers. Let racking, stacking and powering servers become somebody else's job, and put your people on work that differentiates you.",
+          "onScreen": {
+            "heading": "05 · Stop spending money running data centers",
+            "bullets": [
+              "Put your people on work that differentiates you"
+            ]
+          },
+          "visual": "Card 05 fills. Inside, the small building icon from section 4 appears greyed with a soft blue arrow pointing away from it.",
+          "animation": "Card fades in. The building icon desaturates to grey over 0.8s as the arrow draws."
+        },
+        {
+          "id": "s05-07",
+          "startSeconds": 491,
+          "durationSeconds": 17,
+          "narration": "Six: go global in minutes. Deploy your application into AWS Regions around the world with a few clicks, so customers everywhere get low latency.",
+          "onScreen": {
+            "heading": "06 · Go global in minutes",
+            "bullets": [
+              "Deploy to AWS Regions worldwide, close to your customers"
+            ]
+          },
+          "visual": "Card 06 fills with the small world outline and Region pins. With all six cards now complete, the grid holds as a single readable summary.",
+          "animation": "Card fades in; pins drop with a bounce. At 12s all six accent rails light to full primary blue simultaneously for 0.5s, then the frame settles and holds."
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "title": "Infrastructure as a Service (IaaS)",
+      "startSeconds": 508,
+      "durationSeconds": 135,
+      "scenes": [
+        {
+          "id": "s06-01",
+          "startSeconds": 508,
+          "durationSeconds": 16,
+          "narration": "Now the heart of the lesson. Cloud services come in three models, and they differ in exactly one way: how much of the stack you manage, and how much the provider manages.",
+          "onScreen": {
+            "heading": "Infrastructure as a Service (IaaS)",
+            "subheading": "Section 6",
+            "callout": "The three models differ in one thing: who manages which layer."
+          },
+          "visual": "Section transition. Then the frame divides: the left 62% is reserved for the responsibility stack diagram, the right 38% for explanatory notes. Both are empty, so the learner registers the layout that will now persist for four sections.",
+          "animation": "Wipe transition 0.7s. A hairline divider draws vertically between the two zones over 0.4s."
+        },
+        {
+          "id": "s06-02",
+          "startSeconds": 524,
+          "durationSeconds": 18,
+          "narration": "Here's the stack. Nine layers, from the network cables at the bottom to the application your users touch at the top. On-premises, every single layer is yours.",
+          "onScreen": {
+            "heading": "The nine layers",
+            "bullets": [
+              "On-premises: all nine layers are the customer's responsibility"
+            ]
+          },
+          "diagram": {
+            "type": "responsibility-stack",
+            "layerOrderTopToBottom": [
+              "Applications",
+              "Data",
+              "Runtime",
+              "Middleware",
+              "Operating system",
+              "Virtualization",
+              "Servers",
+              "Storage",
+              "Networking"
+            ],
+            "activeColumns": [
+              "onprem"
+            ],
+            "columns": [
+              {
+                "key": "onprem",
+                "label": "On-premises",
+                "headerColor": "#5A7189",
+                "customerManaged": [
+                  "Applications",
+                  "Data",
+                  "Runtime",
+                  "Middleware",
+                  "Operating system",
+                  "Virtualization",
+                  "Servers",
+                  "Storage",
+                  "Networking"
+                ],
+                "providerManaged": []
+              }
+            ]
+          },
+          "visual": "A left-hand axis lists the nine layer names in mono type, top to bottom. Beside it, a single column headed 'On-premises' in slate grey. All nine of its cells read 'You' on the pale customer-managed fill.",
+          "animation": "Axis labels fade in bottom-to-top, 70ms apart. The On-premises column's cells then fill bottom-to-top at the same rhythm, so the stack visibly builds from the network upward."
+        },
+        {
+          "id": "s06-03",
+          "startSeconds": 542,
+          "durationSeconds": 18,
+          "narration": "Infrastructure as a Service moves the bottom four to the provider. AWS runs the networking, the storage, the physical servers and the virtualization that carves them into virtual machines.",
+          "onScreen": {
+            "heading": "IaaS · the provider takes the bottom four",
+            "bullets": [
+              "Virtualization",
+              "Servers",
+              "Storage",
+              "Networking"
+            ],
+            "keyTerm": {
+              "term": "IaaS — Infrastructure as a Service",
+              "definition": "The provider supplies networking, storage, servers and virtualization. You manage everything above."
+            }
+          },
+          "diagram": {
+            "type": "responsibility-stack",
+            "activeColumns": [
+              "onprem",
+              "iaas"
+            ],
+            "columns": [
+              {
+                "key": "iaas",
+                "label": "IaaS",
+                "headerColor": "#1F6FE0",
+                "customerManaged": [
+                  "Applications",
+                  "Data",
+                  "Runtime",
+                  "Middleware",
+                  "Operating system"
+                ],
+                "providerManaged": [
+                  "Virtualization",
+                  "Servers",
+                  "Storage",
+                  "Networking"
+                ]
+              }
+            ]
+          },
+          "visual": "A second column headed 'IaaS' appears in blue beside the On-premises column. Its bottom four cells — Virtualization, Servers, Storage, Networking — are solid blue and read 'AWS'. Its top five stay on the pale customer fill reading 'You'.",
+          "animation": "The IaaS column slides in from the right over 0.5s with all nine cells pale. Then, as the narration names them, the bottom four flip to solid blue one at a time bottom-to-top, 350ms apart, each with a brief white flash on the label."
+        },
+        {
+          "id": "s06-04",
+          "startSeconds": 560,
+          "durationSeconds": 18,
+          "narration": "Everything above that line is still yours. You choose the operating system, install it, patch it, configure the middleware, manage the runtime, and look after your data and application.",
+          "onScreen": {
+            "heading": "IaaS · you still manage the top five",
+            "bullets": [
+              "Applications",
+              "Data",
+              "Runtime",
+              "Middleware",
+              "Operating system"
+            ]
+          },
+          "visual": "Same two columns. A bold navy boundary line is drawn across the IaaS column between Operating system and Virtualization, labelled 'Your responsibility starts here'. The five cells above it receive a slightly stronger border.",
+          "animation": "The boundary line draws left to right over 0.6s with its label fading in after. The five customer cells above pulse once in sequence top-to-bottom as the narration names each responsibility."
+        },
+        {
+          "id": "s06-05",
+          "startSeconds": 578,
+          "durationSeconds": 20,
+          "narration": "Think of it as renting an empty apartment. The building, the plumbing and the electricity are handled. The furniture, the decorating and the cleaning are entirely up to you.",
+          "onScreen": {
+            "heading": "Real-world example",
+            "callout": "IaaS is renting an empty apartment."
+          },
+          "visual": "The stack dims to 25% and holds in place on the left. On the right, an amber analogy panel shows a simple apartment cross-section: the shell, pipes and wiring drawn in blue and labelled 'provider'; empty rooms with furniture outlines drawn in amber dashes and labelled 'you'.",
+          "animation": "Stack dims over 0.4s. Apartment shell draws in blue first, then the amber dashed furniture outlines sketch in, 250ms apart. Stack returns to full opacity in the final 2s."
+        },
+        {
+          "id": "s06-06",
+          "startSeconds": 598,
+          "durationSeconds": 22,
+          "narration": "The classic AWS example is Amazon EC2 — Elastic Compute Cloud. You pick a size, pick an operating system image, and a virtual server starts in about a minute. From there, it behaves like a machine you own.",
+          "onScreen": {
+            "heading": "On AWS",
+            "bullets": [
+              "Amazon EC2 — virtual servers",
+              "Amazon EBS — block storage",
+              "Amazon VPC — networking"
+            ],
+            "keyTerm": {
+              "term": "Amazon EC2",
+              "definition": "Elastic Compute Cloud — resizable virtual servers you launch, configure and manage yourself."
+            }
+          },
+          "visual": "Right panel: three service chips in IaaS blue, stacked with their one-line descriptions. Beneath them a small three-step strip: 'Pick a size → Pick an OS image → Server running (~1 min)'.",
+          "animation": "Chips fade in 200ms apart. The three-step strip illuminates step by step, the third arriving with a green status dot as the narration says 'starts in about a minute'."
+        },
+        {
+          "id": "s06-07",
+          "startSeconds": 620,
+          "durationSeconds": 23,
+          "narration": "So remember this trade: IaaS gives you the most control and the most flexibility of the three models — and in exchange, it asks the most management from you. Control and responsibility always travel together.",
+          "onScreen": {
+            "heading": "The IaaS trade-off",
+            "callout": "Most control · most management",
+            "bullets": [
+              "Control and responsibility always travel together"
+            ]
+          },
+          "visual": "A navy summary band spans the full width beneath the stack. Two opposed horizontal gauges sit inside it: 'Your control' filled almost to maximum, 'Your management effort' filled almost to maximum. Both in IaaS blue.",
+          "animation": "Band rises 30px into place. Both gauges fill left to right over 1.2s, arriving together to make the pairing explicit. Frame settles and holds for the final 6s."
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "title": "Platform as a Service (PaaS)",
+      "startSeconds": 643,
+      "durationSeconds": 125,
+      "scenes": [
+        {
+          "id": "s07-01",
+          "startSeconds": 643,
+          "durationSeconds": 15,
+          "narration": "Platform as a Service raises that line higher. The provider now takes the operating system, the middleware and the runtime as well.",
+          "onScreen": {
+            "heading": "Platform as a Service (PaaS)",
+            "subheading": "Section 7",
+            "keyTerm": {
+              "term": "PaaS — Platform as a Service",
+              "definition": "The provider also manages the runtime, middleware and operating system. You bring your application and data."
+            }
+          },
+          "diagram": {
+            "type": "responsibility-stack",
+            "activeColumns": [
+              "onprem",
+              "iaas",
+              "paas"
+            ],
+            "columns": [
+              {
+                "key": "paas",
+                "label": "PaaS",
+                "headerColor": "#0C8C99",
+                "customerManaged": [
+                  "Applications",
+                  "Data"
+                ],
+                "providerManaged": [
+                  "Runtime",
+                  "Middleware",
+                  "Operating system",
+                  "Virtualization",
+                  "Servers",
+                  "Storage",
+                  "Networking"
+                ],
+                "customerFocus": "Applications and data only"
+              }
+            ]
+          },
+          "visual": "A third column headed 'PaaS' appears in teal. Its bottom seven cells are solid teal reading 'AWS'; only Applications and Data stay on the pale customer fill.",
+          "animation": "Column slides in from the right. The four bottom cells arrive already teal (carried over from IaaS), then Operating system, Middleware and Runtime flip teal in sequence bottom-to-top, 400ms apart, exactly as the narration names them. The responsibility boundary line visibly climbs three rows."
+        },
+        {
+          "id": "s07-02",
+          "startSeconds": 658,
+          "durationSeconds": 20,
+          "narration": "That leaves you with just two layers: your data, and your application. You write the code and hand it over; the platform runs it, scales it, and patches everything underneath.",
+          "onScreen": {
+            "heading": "PaaS · you manage two layers",
+            "bullets": [
+              "Applications",
+              "Data"
+            ]
+          },
+          "visual": "Same three columns. The two remaining customer cells in the PaaS column are outlined in navy and lifted slightly, with a bracket to their right labelled 'Your job'. A short caption beneath the PaaS column reads 'Write code → hand it over'.",
+          "animation": "The two cells lift 4px and their borders thicken over 0.4s. The bracket draws downward. A small code-file icon travels from the right panel into the Applications cell at 9s."
+        },
+        {
+          "id": "s07-03",
+          "startSeconds": 678,
+          "durationSeconds": 20,
+          "narration": "Notice what disappears from your job. No operating system updates. No security patches on the server. No capacity planning for the runtime. That work still happens — it just isn't yours.",
+          "onScreen": {
+            "heading": "What leaves your job",
+            "bullets": [
+              "Operating system updates",
+              "Server security patching",
+              "Runtime capacity planning"
+            ],
+            "callout": "The work still happens — it just isn't yours."
+          },
+          "visual": "Right panel: the three items listed with each one struck through in teal as it is named. The struck items then fade to 40% and slide into a small teal tray labelled 'Managed by AWS' at the bottom of the panel.",
+          "animation": "Strike-through lines draw across each item as the narration names it, 4s apart. All three slide into the tray together at 16s."
+        },
+        {
+          "id": "s07-04",
+          "startSeconds": 698,
+          "durationSeconds": 22,
+          "narration": "The apartment analogy again: this time it's fully furnished and serviced. Beds are made, the kitchen is stocked, someone else fixes the boiler. You bring your suitcase and start living.",
+          "onScreen": {
+            "heading": "Real-world example",
+            "callout": "PaaS is a fully furnished, serviced apartment."
+          },
+          "visual": "The stack dims to 25%. The amber analogy panel returns, but now the apartment interior is fully drawn — furniture, a stocked kitchen, a serviced boiler — all in blue and labelled 'provider'. Only a single suitcase is drawn in amber and labelled 'you'.",
+          "animation": "The furniture outlines from section 6, previously amber dashes, redraw as solid blue one by one over 2s — a direct visual callback that shows what moved to the provider. The suitcase then slides in through the door."
+        },
+        {
+          "id": "s07-05",
+          "startSeconds": 720,
+          "durationSeconds": 24,
+          "narration": "On AWS, AWS Elastic Beanstalk is the classic example: upload your application and it provisions the servers, load balancing and scaling for you. AWS Lambda and Amazon RDS sit in the same spirit — you supply code or data, not servers.",
+          "onScreen": {
+            "heading": "On AWS",
+            "bullets": [
+              "AWS Elastic Beanstalk — upload an app, AWS runs it",
+              "AWS Lambda — run code with no servers to manage",
+              "Amazon RDS — a managed database engine",
+              "AWS Fargate — containers without managing instances"
+            ],
+            "keyTerm": {
+              "term": "AWS Elastic Beanstalk",
+              "definition": "You upload application code; AWS provisions the servers, load balancing and scaling for you."
+            }
+          },
+          "visual": "Right panel: four service chips in PaaS teal with one-line descriptions. Beneath them, a small flow: a code bundle icon → an upload arrow → three provisioned resource tiles (server, load balancer, autoscaler) appearing automatically.",
+          "animation": "Chips fade in 250ms apart. The flow then plays once: the bundle travels along the arrow, and the three resource tiles pop into existence in sequence without any cursor or click — the point being that nobody configured them."
+        },
+        {
+          "id": "s07-06",
+          "startSeconds": 744,
+          "durationSeconds": 24,
+          "narration": "So the promise of PaaS is focus. Developers spend their time on features and business logic, while the platform is managed for them. You give up some control over the environment — and for most teams, that's a bargain.",
+          "onScreen": {
+            "heading": "The PaaS trade-off",
+            "callout": "Balanced · less infrastructure management",
+            "bullets": [
+              "Developers focus on the application; the platform is managed for them"
+            ]
+          },
+          "visual": "The navy summary band returns beneath the stack with the two gauges. 'Your control' now sits around the midpoint; 'Your management effort' sits low. Both rendered in PaaS teal.",
+          "animation": "The gauges animate from their IaaS positions to their PaaS positions over 1.4s — control sliding down, management effort sliding further down — so the learner sees the change rather than a new static state. Frame settles and holds for the final 7s."
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "title": "Software as a Service (SaaS)",
+      "startSeconds": 768,
+      "durationSeconds": 115,
+      "scenes": [
+        {
+          "id": "s08-01",
+          "startSeconds": 768,
+          "durationSeconds": 15,
+          "narration": "Software as a Service goes all the way. The provider manages every layer in the stack — including the application itself.",
+          "onScreen": {
+            "heading": "Software as a Service (SaaS)",
+            "subheading": "Section 8",
+            "keyTerm": {
+              "term": "SaaS — Software as a Service",
+              "definition": "Finished software delivered over the internet. The provider manages the application and everything beneath it."
+            }
+          },
+          "diagram": {
+            "type": "responsibility-stack",
+            "activeColumns": [
+              "onprem",
+              "iaas",
+              "paas",
+              "saas"
+            ],
+            "columns": [
+              {
+                "key": "saas",
+                "label": "SaaS",
+                "headerColor": "#6A55D3",
+                "customerManaged": [],
+                "providerManaged": [
+                  "Applications",
+                  "Data",
+                  "Runtime",
+                  "Middleware",
+                  "Operating system",
+                  "Virtualization",
+                  "Servers",
+                  "Storage",
+                  "Networking"
+                ],
+                "customerFocus": "Uses the ready-to-use application"
+              }
+            ]
+          },
+          "visual": "The fourth and final column, headed 'SaaS', appears in violet. All nine cells are solid violet reading 'AWS'. A caption beneath it reads 'You use a ready-to-use application'.",
+          "animation": "Column slides in from the right with cells pale, then all nine flip to solid violet in a single bottom-to-top sweep over 1s — noticeably faster than the previous columns, reinforcing 'goes all the way'. The responsibility boundary line rises off the top of the column and fades."
+        },
+        {
+          "id": "s08-02",
+          "startSeconds": 783,
+          "durationSeconds": 18,
+          "narration": "You don't install anything, you don't run anything, and you don't patch anything. There is no server for you to log into. You open a browser, sign in, and use finished software that somebody else keeps running.",
+          "onScreen": {
+            "heading": "Nothing to install, run or patch",
+            "bullets": [
+              "Open a browser",
+              "Sign in",
+              "Use the software"
+            ]
+          },
+          "visual": "The stack dims to 25%. Centre frame: a clean browser window mock with a sign-in field, which transitions to a generic finished application interface — a mail-like list view drawn in neutral blue-grey shapes, no real branding.",
+          "animation": "Browser window scales in from 0.96. The sign-in field fills with dots, then the window crossfades to the application view at 10s. No cursor is shown after sign-in — the interface simply works."
+        },
+        {
+          "id": "s08-03",
+          "startSeconds": 801,
+          "durationSeconds": 18,
+          "narration": "Your only responsibility is your own data and your users — who has an account, what permissions they have, and how you use the product.",
+          "onScreen": {
+            "heading": "What is still yours",
+            "bullets": [
+              "Your data inside the application",
+              "Your users and their permissions",
+              "How your organization uses the product"
+            ]
+          },
+          "visual": "The SaaS column returns to full opacity. A small violet-outlined card floats beside it, sitting outside the nine layers, labelled 'Yours: data · users · usage' — deliberately placed outside the stack because it is not an infrastructure layer.",
+          "animation": "The floating card slides in from the right and settles beside the column with a thin connector line. Its three items fade in 400ms apart."
+        },
+        {
+          "id": "s08-04",
+          "startSeconds": 819,
+          "durationSeconds": 21,
+          "narration": "Back to housing one last time: SaaS isn't renting an apartment at all. It's checking into a hotel. You get a room that's ready now, you use it for as long as you need, and you never think about the boiler.",
+          "onScreen": {
+            "heading": "Real-world example",
+            "callout": "SaaS is checking into a hotel."
+          },
+          "visual": "The amber analogy panel returns a third and final time. The apartment cross-section crossfades into a hotel: a made bed, a key card, a reception desk — everything drawn in blue and labelled 'provider'. The amber suitcase from section 7 is the only customer element, now shown being carried in.",
+          "animation": "Apartment crossfades to hotel over 0.8s. The suitcase slides in and settles. A small 'ready now' badge fades in over the bed at 14s."
+        },
+        {
+          "id": "s08-05",
+          "startSeconds": 840,
+          "durationSeconds": 20,
+          "narration": "Examples are everywhere, and you almost certainly use several already. Gmail, Salesforce, Dropbox, Zoom, Microsoft 365. On AWS, Amazon WorkSpaces gives you a ready-made desktop, and Amazon Chime gives you ready-made meetings. Nothing to install in either case.",
+          "onScreen": {
+            "heading": "Examples",
+            "bullets": [
+              "Everyday: Gmail · Salesforce · Dropbox · Zoom · Microsoft 365",
+              "On AWS: Amazon WorkSpaces · Amazon Chime · Amazon QuickSight"
+            ]
+          },
+          "visual": "Two rows of text chips in SaaS violet — the everyday tools on the top row, the AWS services beneath. All names set in mono type; no third-party logos are used.",
+          "animation": "Chips fade in along each row, 150ms apart, timed so the AWS row begins exactly as the narration says 'On AWS'."
+        },
+        {
+          "id": "s08-06",
+          "startSeconds": 860,
+          "durationSeconds": 23,
+          "narration": "The trade-off is the mirror image of IaaS. SaaS asks almost nothing of you operationally, but you take the software as it comes. You can configure it — you can't rebuild it.",
+          "onScreen": {
+            "heading": "The SaaS trade-off",
+            "callout": "Least infrastructure management · ready to use",
+            "bullets": [
+              "You can configure it — you can't rebuild it"
+            ]
+          },
+          "visual": "The navy summary band returns with the two gauges, now in SaaS violet. 'Your control' sits near the minimum; 'Your management effort' sits near the minimum.",
+          "animation": "Gauges animate from their PaaS positions to their SaaS positions over 1.4s. At 16s a ghosted overlay briefly shows the IaaS positions from section 6 alongside them, making the mirror-image point visible for 3s before fading."
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "title": "IaaS vs PaaS vs SaaS comparison",
+      "startSeconds": 883,
+      "durationSeconds": 125,
+      "scenes": [
+        {
+          "id": "s09-01",
+          "startSeconds": 883,
+          "durationSeconds": 18,
+          "narration": "Let's put all four side by side. This single diagram answers most of the exam questions you will meet on this topic, so it is genuinely worth burning into memory. Take a good look at it.",
+          "onScreen": {
+            "heading": "IaaS vs PaaS vs SaaS",
+            "subheading": "Section 9",
+            "callout": "One diagram, most of the exam questions."
+          },
+          "diagram": {
+            "type": "responsibility-stack",
+            "activeColumns": [
+              "onprem",
+              "iaas",
+              "paas",
+              "saas"
+            ],
+            "note": "Full four-column comparison. This is the master diagram of the lesson.",
+            "layerOrderTopToBottom": [
+              "Applications",
+              "Data",
+              "Runtime",
+              "Middleware",
+              "Operating system",
+              "Virtualization",
+              "Servers",
+              "Storage",
+              "Networking"
+            ],
+            "columns": [
+              {
+                "key": "onprem",
+                "label": "On-premises",
+                "headerColor": "#5A7189",
+                "customerManaged": [
+                  "Applications",
+                  "Data",
+                  "Runtime",
+                  "Middleware",
+                  "Operating system",
+                  "Virtualization",
+                  "Servers",
+                  "Storage",
+                  "Networking"
+                ],
+                "providerManaged": [],
+                "customerLayerCount": 9
+              },
+              {
+                "key": "iaas",
+                "label": "IaaS",
+                "headerColor": "#1F6FE0",
+                "customerManaged": [
+                  "Applications",
+                  "Data",
+                  "Runtime",
+                  "Middleware",
+                  "Operating system"
+                ],
+                "providerManaged": [
+                  "Virtualization",
+                  "Servers",
+                  "Storage",
+                  "Networking"
+                ],
+                "customerLayerCount": 5
+              },
+              {
+                "key": "paas",
+                "label": "PaaS",
+                "headerColor": "#0C8C99",
+                "customerManaged": [
+                  "Applications",
+                  "Data"
+                ],
+                "providerManaged": [
+                  "Runtime",
+                  "Middleware",
+                  "Operating system",
+                  "Virtualization",
+                  "Servers",
+                  "Storage",
+                  "Networking"
+                ],
+                "customerLayerCount": 2
+              },
+              {
+                "key": "saas",
+                "label": "SaaS",
+                "headerColor": "#6A55D3",
+                "customerManaged": [],
+                "providerManaged": [
+                  "Applications",
+                  "Data",
+                  "Runtime",
+                  "Middleware",
+                  "Operating system",
+                  "Virtualization",
+                  "Servers",
+                  "Storage",
+                  "Networking"
+                ],
+                "customerLayerCount": 0
+              }
+            ]
+          },
+          "visual": "The full four-column responsibility stack, now centred and scaled up to fill the frame — the notes panel is dropped for this scene so the diagram gets the whole width. A legend beneath reads 'You manage' (pale fill) and 'Provider manages' (solid colour).",
+          "animation": "Section transition, then the diagram scales up from its previous 62% position to full width over 0.7s, holding all cell states. Legend fades in beneath."
+        },
+        {
+          "id": "s09-02",
+          "startSeconds": 901,
+          "durationSeconds": 20,
+          "narration": "Read it left to right. On-premises: you manage all nine layers. IaaS: five. PaaS: just two. SaaS: none at all. Watch the pattern — as you move right, the blue grows and your workload shrinks.",
+          "onScreen": {
+            "heading": "Count the layers you manage",
+            "bullets": [
+              "On-premises: 9",
+              "IaaS: 5",
+              "PaaS: 2",
+              "SaaS: 0"
+            ]
+          },
+          "visual": "A counter badge appears beneath each column showing the number of customer-managed layers: 9, 5, 2, 0. As each is named, that column's customer-managed cells briefly outline in navy.",
+          "animation": "Badges count up from 0 to their value in 0.4s, one column at a time, 4s apart, synced to the narration. On the final line the four badges pulse together and a thin arrow labelled 'provider manages more →' sweeps left to right beneath them."
+        },
+        {
+          "id": "s09-03",
+          "startSeconds": 921,
+          "durationSeconds": 22,
+          "narration": "Now read it as two sliders moving in opposite directions. As you move right, your control decreases and the provider's responsibility increases. There is no 'best' model — only the right position on that slider for the job.",
+          "onScreen": {
+            "heading": "Two sliders, opposite directions",
+            "callout": "There is no best model — only the right position for the job.",
+            "keyTerm": {
+              "term": "Shared responsibility",
+              "definition": "The split between what the cloud provider manages and what the customer manages. It moves with the service model."
+            }
+          },
+          "visual": "The stack shrinks to the upper half. Beneath it, two horizontal gradient tracks span the width: \"Your control\" running dark-to-light left to right, and \"Provider responsibility\" running light-to-dark. Four tick marks sit under both, aligned to the four columns above and labelled On-premises, IaaS, PaaS, SaaS.",
+          "animation": "Stack scales to 60% and docks upward. The two tracks wipe in from opposite ends simultaneously — control from the left, responsibility from the right — over 1s. Tick markers then drop into place aligned with their columns, 200ms apart."
+        },
+        {
+          "id": "s09-04",
+          "startSeconds": 943,
+          "durationSeconds": 22,
+          "narration": "Here is that same trade-off as a table, and this is the version worth memorising. IaaS: more control, and more management. PaaS: balanced, with less infrastructure management. SaaS: the least infrastructure management of all — simply ready to use.",
+          "onScreen": {
+            "heading": "The comparison table",
+            "bullets": [
+              "IaaS → More control → More management",
+              "PaaS → Balanced → Less infrastructure management",
+              "SaaS → Least infrastructure management → Ready to use"
+            ]
+          },
+          "visual": "The animated comparison table takes the frame. Three rows, colour-coded by model, each with the model name, its control characteristic and its management characteristic exactly as specified: IaaS · More control · More management. PaaS · Balanced · Less infrastructure management. SaaS · Least infrastructure management · Ready to use.",
+          "animation": "The table header draws first. Each row then slides in from the left, 900ms apart, with its model chip filling to full colour on arrival and its two cells typing in. Once all three rows are present, a vertical highlight sweeps down the Control column, then the Management column.",
+          "diagram": {
+            "type": "comparison-table",
+            "note": "The animated comparison table specified in the brief. Rows build one at a time.",
+            "columns": [
+              "Model",
+              "Control",
+              "Management"
+            ],
+            "rows": [
+              {
+                "model": "IaaS",
+                "color": "#1F6FE0",
+                "control": "More control",
+                "management": "More management"
+              },
+              {
+                "model": "PaaS",
+                "color": "#0C8C99",
+                "control": "Balanced",
+                "management": "Less infrastructure management"
+              },
+              {
+                "model": "SaaS",
+                "color": "#6A55D3",
+                "control": "Least infrastructure management",
+                "management": "Ready to use"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s09-05",
+          "startSeconds": 965,
+          "durationSeconds": 22,
+          "narration": "If you prefer analogies, take your pick. IaaS gives you the building blocks. PaaS gives you the workshop. SaaS gives you the finished product. Or in food terms: IaaS is cooking from raw ingredients, PaaS is a meal kit, and SaaS is ordering at a restaurant.",
+          "onScreen": {
+            "heading": "Two ways to remember it",
+            "bullets": [
+              "IaaS → building blocks · PaaS → the workshop · SaaS → the finished product",
+              "IaaS → cook from ingredients · PaaS → a meal kit · SaaS → a restaurant meal"
+            ]
+          },
+          "visual": "The comparison table dims to 30% and holds in the upper half. Two rows of analogy tiles appear beneath it: the first row shows building blocks, a workshop bench and a wrapped finished product; the second shows raw ingredients on a board, a meal-kit box, and a plated dish under a cloche. Each tile carries a small dot in its model colour.",
+          "animation": "Table dims over 0.4s. Row one tiles pop in with a 1.04 overshoot, 900ms apart, on each named analogy; row two follows at the same rhythm as the food analogy is read."
+        },
+        {
+          "id": "s09-06",
+          "startSeconds": 987,
+          "durationSeconds": 21,
+          "narration": "Whichever memory hook you choose, the question underneath is always identical: where does the provider's responsibility stop, and where does mine begin? Answer that for any scenario in the exam, and you will pick the right model every time.",
+          "onScreen": {
+            "heading": "The question underneath all of it",
+            "callout": "Where does the provider's responsibility stop, and mine begin?"
+          },
+          "visual": "Everything clears except the four-column stack, which returns to full size and full opacity. The four responsibility boundary lines — none for On-premises, above Virtualization for IaaS, above Runtime for PaaS, above Applications for SaaS — draw across in bright navy simultaneously, forming a visible staircase climbing left to right.",
+          "animation": "Clear-out over 0.5s. The staircase of boundary lines draws left to right over 1.2s as one connected movement, then holds. The question sits beneath in display type. Frame settles and holds for the final 8s — this is the image the learner should retain."
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "title": "Examples of each model",
+      "startSeconds": 1008,
+      "durationSeconds": 100,
+      "scenes": [
+        {
+          "id": "s10-01",
+          "startSeconds": 1008,
+          "durationSeconds": 18,
+          "narration": "Examples make this stick, so here are the ones worth knowing. AWS services first, then the everyday tools you already use without thinking of them as cloud models at all. Learn a few from each column.",
+          "onScreen": {
+            "heading": "Examples of each model",
+            "subheading": "Section 10"
+          },
+          "visual": "Section transition into three empty columns headed IaaS, PaaS and SaaS, each with its model colour as a header bar and two empty sub-sections labelled 'On AWS' and 'Elsewhere'.",
+          "animation": "Wipe transition. The three column headers fill with their model colours left to right, 200ms apart."
+        },
+        {
+          "id": "s10-02",
+          "startSeconds": 1026,
+          "durationSeconds": 21,
+          "narration": "IaaS: Amazon EC2 for virtual servers, Amazon EBS for block storage, Amazon VPC for networking. Outside AWS, think of a rented virtual private server where you install everything yourself.",
+          "onScreen": {
+            "heading": "IaaS examples",
+            "bullets": [
+              "On AWS: Amazon EC2 · Amazon EBS · Amazon VPC",
+              "Elsewhere: a rented virtual private server you configure yourself"
+            ]
+          },
+          "visual": "The IaaS column fills with three blue service chips under 'On AWS', each with a one-line role, and one chip under 'Elsewhere'.",
+          "animation": "Chips fade in bottom-up, 400ms apart, synced to the narration naming each service."
+        },
+        {
+          "id": "s10-03",
+          "startSeconds": 1047,
+          "durationSeconds": 21,
+          "narration": "PaaS: AWS Elastic Beanstalk, AWS Lambda, Amazon RDS, and AWS Fargate. Outside AWS, Heroku and Google App Engine follow exactly the same pattern. In every one of them the deal is identical — you deploy code, and somebody else deals with the servers.",
+          "onScreen": {
+            "heading": "PaaS examples",
+            "bullets": [
+              "On AWS: AWS Elastic Beanstalk · AWS Lambda · Amazon RDS · AWS Fargate",
+              "Elsewhere: Heroku · Google App Engine",
+              "The pattern: you deploy code, not servers"
+            ]
+          },
+          "visual": "The PaaS column fills with four teal chips under 'On AWS' and two under 'Elsewhere'. The IaaS column stays fully visible so the three build into one comparable set.",
+          "animation": "Chips fade in 350ms apart. The phrase 'you deploy code, not servers' fades in beneath the column at 17s."
+        },
+        {
+          "id": "s10-04",
+          "startSeconds": 1068,
+          "durationSeconds": 21,
+          "narration": "SaaS: Amazon WorkSpaces, Amazon Chime and Amazon QuickSight. Outside AWS, Gmail, Salesforce, Slack, Zoom and Dropbox. Here is a quick test you can apply to anything: if you just sign in and start using it, it is SaaS.",
+          "onScreen": {
+            "heading": "SaaS examples",
+            "bullets": [
+              "On AWS: Amazon WorkSpaces · Amazon Chime · Amazon QuickSight",
+              "Elsewhere: Gmail · Salesforce · Slack · Zoom · Dropbox",
+              "The test: if you sign in and simply use it, it's SaaS"
+            ]
+          },
+          "visual": "The SaaS column fills with violet chips, completing all three columns. Names are set in mono type; no third-party logos are used anywhere.",
+          "animation": "Chips fade in 300ms apart. At 18s all three columns receive a simultaneous 2px lift so the completed comparison reads as a single set."
+        },
+        {
+          "id": "s10-05",
+          "startSeconds": 1089,
+          "durationSeconds": 19,
+          "narration": "One caution for the exam: services don't always sit neatly in one box. Amazon RDS is often called PaaS because AWS manages the database engine for you — the principle matters more than the label.",
+          "onScreen": {
+            "heading": "Exam caution",
+            "callout": "The principle matters more than the label.",
+            "keyTerm": {
+              "term": "Managed service",
+              "definition": "A service where AWS operates the underlying software for you, so it behaves like PaaS even when it is not labelled that way."
+            }
+          },
+          "visual": "The three columns dim to 35%. An amber caution band spans the lower third. Inside it, the 'Amazon RDS' chip lifts out of the PaaS column and hovers between IaaS and PaaS with a dashed outline, illustrating that the boundary is not always crisp.",
+          "animation": "Caution band wipes in from the left. The RDS chip detaches and floats to the boundary over 1s, its outline switching from solid to dashed on arrival. It stays hovering to the cut."
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "title": "When to use each model",
+      "startSeconds": 1108,
+      "durationSeconds": 110,
+      "scenes": [
+        {
+          "id": "s11-01",
+          "startSeconds": 1108,
+          "durationSeconds": 16,
+          "narration": "So when should you choose each one? Here is a practical guide, framed as the questions a real team actually asks itself before starting a project. Three cards, three decisions.",
+          "onScreen": {
+            "heading": "When to use each model",
+            "subheading": "Section 11"
+          },
+          "visual": "Section transition into three empty decision cards side by side, each with a coloured top rule in its model colour and space for a guiding question.",
+          "animation": "Wipe transition. The three top rules draw left to right in sequence, 200ms apart."
+        },
+        {
+          "id": "s11-02",
+          "startSeconds": 1124,
+          "durationSeconds": 24,
+          "narration": "Choose IaaS when you need control. A specific operating system version, custom networking, licensed software with strict requirements, or a legacy application being lifted from your own data center without redesign. You accept the management burden because the requirement demands it.",
+          "onScreen": {
+            "heading": "Choose IaaS when you need control",
+            "callout": "\"We have a specific requirement the platform won't allow.\"",
+            "bullets": [
+              "A specific operating system or version",
+              "Custom networking or security configuration",
+              "Licensed software with strict requirements",
+              "Lift-and-shift of a legacy application"
+            ]
+          },
+          "visual": "Card 1 fills. Its guiding question sits at the top in italic, followed by four short bullets, then a footer line reading 'Trade: you accept the management burden'.",
+          "animation": "Card fades in and rises 12px. Bullets appear 900ms apart in time with the narration. The footer line fades in last, at 20s."
+        },
+        {
+          "id": "s11-03",
+          "startSeconds": 1148,
+          "durationSeconds": 24,
+          "narration": "Choose PaaS when you want to ship software fast. A start-up building a web application, a team that has no dedicated operations staff, or any project where server maintenance adds no value to the customer.",
+          "onScreen": {
+            "heading": "Choose PaaS when you want to ship fast",
+            "callout": "\"We want to build the product, not run servers.\"",
+            "bullets": [
+              "A start-up building a web application",
+              "A team with no dedicated operations staff",
+              "Any project where server maintenance adds no customer value"
+            ]
+          },
+          "visual": "Card 2 fills in the same pattern, teal-ruled. Card 1 remains fully visible.",
+          "animation": "Card fades in and rises. Bullets appear 1.1s apart. Footer reads 'Trade: less control over the environment'."
+        },
+        {
+          "id": "s11-04",
+          "startSeconds": 1172,
+          "durationSeconds": 24,
+          "narration": "Choose SaaS when the problem is already solved. Email, video calls, customer relationship management, payroll, file sharing. Building your own version of these is almost never a good use of engineering time.",
+          "onScreen": {
+            "heading": "Choose SaaS when the problem is already solved",
+            "callout": "\"Someone already built this well.\"",
+            "bullets": [
+              "Email · video calls · file sharing",
+              "Customer relationship management · payroll",
+              "Building your own is rarely a good use of engineering time"
+            ]
+          },
+          "visual": "Card 3 fills, violet-ruled, completing the row of three.",
+          "animation": "Card fades in and rises. Bullets appear 1.1s apart. Footer reads 'Trade: you take the software as it comes'. At 21s all three cards lift 2px together."
+        },
+        {
+          "id": "s11-05",
+          "startSeconds": 1196,
+          "durationSeconds": 22,
+          "narration": "And in the real world you'll use all three at once — SaaS for email, PaaS for the product your developers build, IaaS for the one stubborn legacy system that isn't ready to move.",
+          "onScreen": {
+            "heading": "In practice: all three at once",
+            "bullets": [
+              "SaaS for email",
+              "PaaS for the product your developers build",
+              "IaaS for the legacy system that isn't ready to move"
+            ]
+          },
+          "visual": "The three cards shrink and dock to the top third. Beneath them, a single organization diagram: one company outline containing three workload blocks, each tinted in its model colour and labelled with its use.",
+          "animation": "Cards scale to 55% and dock over 0.6s. The company outline draws, then the three coloured workload blocks drop in 500ms apart, each connected by a short line to its matching card above."
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "title": "Quick knowledge check",
+      "startSeconds": 1218,
+      "durationSeconds": 170,
+      "note": "Five questions. Each runs read (question and options on screen) → think (countdown, no narration) → reveal (correct answer and explanation). The think beats are deliberately silent so a learner can pause or answer aloud.",
+      "scenes": [
+        {
+          "id": "s12-01",
+          "startSeconds": 1218,
+          "durationSeconds": 15,
+          "narration": "Question one. Which cloud computing model gives the customer the most control over the underlying infrastructure? Is it A, SaaS. B, PaaS. C, IaaS. Or D, all three provide equal control.",
+          "onScreen": {
+            "heading": "Question 1 of 5",
+            "callout": "Which cloud computing model gives the customer the most control over the underlying infrastructure?",
+            "bullets": [
+              "A · SaaS",
+              "B · PaaS",
+              "C · IaaS",
+              "D · All three provide equal control"
+            ]
+          },
+          "quiz": {
+            "questionId": "kc1",
+            "phase": "read",
+            "question": "Which cloud computing model gives the customer the most control over the underlying infrastructure?",
+            "options": [
+              "SaaS",
+              "PaaS",
+              "IaaS",
+              "All three provide equal control"
+            ],
+            "correctIndex": 2
+          },
+          "visual": "Quiz layout: a mono 'QUESTION 1 OF 5' eyebrow, the question in large navy display type, and four answer tiles in a two-by-two grid, each with a lettered key badge A to D on a soft blue square.",
+          "animation": "Section transition into the quiz layout. Question types in over 1.5s. The four tiles fade in 250ms apart, timed so each lands as the narration reads its letter."
+        },
+        {
+          "id": "s12-02",
+          "startSeconds": 1233,
+          "durationSeconds": 8,
+          "narration": "",
+          "onScreen": {
+            "heading": "Question 1 of 5",
+            "callout": "Take a moment."
+          },
+          "quiz": {
+            "questionId": "kc1",
+            "phase": "think"
+          },
+          "visual": "Same frame, held. A circular countdown ring appears beside the question, filled in primary blue, unwinding from full to empty over the full eight seconds. No narration — silence is intentional.",
+          "animation": "Ring unwinds linearly over 8s. Answer tiles hold completely still. No other movement anywhere in frame."
+        },
+        {
+          "id": "s12-03",
+          "startSeconds": 1241,
+          "durationSeconds": 11,
+          "narration": "The answer is C, IaaS. You manage the operating system and everything above it — the most control, and the most responsibility.",
+          "onScreen": {
+            "heading": "Answer: C · IaaS",
+            "callout": "You manage the OS and everything above it — most control, most responsibility."
+          },
+          "quiz": {
+            "questionId": "kc1",
+            "phase": "reveal",
+            "correctIndex": 2,
+            "explanation": "IaaS. You manage the operating system and everything above it, which gives the most control and the most responsibility."
+          },
+          "visual": "Tile C turns green with a white check in its key badge. Tiles A, B and D desaturate to 45%. An explanation bar in navy slides up beneath the grid.",
+          "animation": "Tile C fills green over 0.35s with a single ring pulse. The others desaturate simultaneously. Explanation bar rises 30px and settles."
+        },
+        {
+          "id": "s12-04",
+          "startSeconds": 1252,
+          "durationSeconds": 15,
+          "narration": "Question two. A small development team wants to deploy a web application without managing servers, patching operating systems, or configuring scaling. Which model fits best? A, IaaS. B, PaaS. C, SaaS. D, on-premises.",
+          "onScreen": {
+            "heading": "Question 2 of 5",
+            "callout": "A small development team wants to deploy a web application without managing servers, patching operating systems, or configuring scaling. Which model fits best?",
+            "bullets": [
+              "A · IaaS",
+              "B · PaaS",
+              "C · SaaS",
+              "D · On-premises"
+            ]
+          },
+          "quiz": {
+            "questionId": "kc2",
+            "phase": "read",
+            "question": "A small development team wants to deploy a web application without managing servers, patching operating systems, or configuring scaling. Which model fits best?",
+            "options": [
+              "IaaS",
+              "PaaS",
+              "SaaS",
+              "On-premises"
+            ],
+            "correctIndex": 1
+          },
+          "visual": "Same quiz layout, new content. The eyebrow updates to 'QUESTION 2 OF 5' and a small progress row of five dots shows the first filled.",
+          "animation": "Previous question crossfades out over 0.4s. New question types in; tiles fade in 250ms apart as before."
+        },
+        {
+          "id": "s12-05",
+          "startSeconds": 1267,
+          "durationSeconds": 8,
+          "narration": "",
+          "onScreen": {
+            "heading": "Question 2 of 5",
+            "callout": "Take a moment."
+          },
+          "quiz": {
+            "questionId": "kc2",
+            "phase": "think"
+          },
+          "visual": "Held frame with the countdown ring unwinding. Silent.",
+          "animation": "Ring unwinds linearly over 8s. Nothing else moves."
+        },
+        {
+          "id": "s12-06",
+          "startSeconds": 1275,
+          "durationSeconds": 11,
+          "narration": "B, PaaS. The platform is managed for you, so the developers focus purely on the application, not on the servers underneath it.",
+          "onScreen": {
+            "heading": "Answer: B · PaaS",
+            "callout": "The platform is managed — developers focus purely on the application."
+          },
+          "quiz": {
+            "questionId": "kc2",
+            "phase": "reveal",
+            "correctIndex": 1,
+            "explanation": "PaaS. The platform is managed for you, so the developers focus purely on the application."
+          },
+          "visual": "Tile B turns green; the rest desaturate. Explanation bar slides up.",
+          "animation": "As scene s12-03."
+        },
+        {
+          "id": "s12-07",
+          "startSeconds": 1286,
+          "durationSeconds": 13,
+          "narration": "Question three. Gmail, Salesforce and Dropbox are examples of which model? A, IaaS. B, PaaS. C, SaaS. D, a mix of IaaS and PaaS.",
+          "onScreen": {
+            "heading": "Question 3 of 5",
+            "callout": "Gmail, Salesforce and Dropbox are examples of which model?",
+            "bullets": [
+              "A · IaaS",
+              "B · PaaS",
+              "C · SaaS",
+              "D · A mix of IaaS and PaaS"
+            ]
+          },
+          "quiz": {
+            "questionId": "kc3",
+            "phase": "read",
+            "question": "Gmail, Salesforce and Dropbox are examples of which model?",
+            "options": [
+              "IaaS",
+              "PaaS",
+              "SaaS",
+              "A mix of IaaS and PaaS"
+            ],
+            "correctIndex": 2
+          },
+          "visual": "Same layout; progress dots show two filled.",
+          "animation": "Crossfade, type-in, tiles stagger as before."
+        },
+        {
+          "id": "s12-08",
+          "startSeconds": 1299,
+          "durationSeconds": 8,
+          "narration": "",
+          "onScreen": {
+            "heading": "Question 3 of 5",
+            "callout": "Take a moment."
+          },
+          "quiz": {
+            "questionId": "kc3",
+            "phase": "think"
+          },
+          "visual": "Held frame with the countdown ring unwinding. Silent.",
+          "animation": "Ring unwinds linearly over 8s."
+        },
+        {
+          "id": "s12-09",
+          "startSeconds": 1307,
+          "durationSeconds": 11,
+          "narration": "C, SaaS. Ready-to-use software, delivered over the internet, with nothing for you to install or maintain.",
+          "onScreen": {
+            "heading": "Answer: C · SaaS",
+            "callout": "Ready-to-use software over the internet — nothing to install or maintain."
+          },
+          "quiz": {
+            "questionId": "kc3",
+            "phase": "reveal",
+            "correctIndex": 2,
+            "explanation": "SaaS. Ready-to-use software delivered over the internet, with nothing for you to install or maintain."
+          },
+          "visual": "Tile C turns green; the rest desaturate. Explanation bar slides up.",
+          "animation": "As scene s12-03."
+        },
+        {
+          "id": "s12-10",
+          "startSeconds": 1318,
+          "durationSeconds": 14,
+          "narration": "Question four. In the IaaS model, who is responsible for patching the guest operating system? A, the cloud provider. B, the customer. C, it's shared equally. D, no patching is required.",
+          "onScreen": {
+            "heading": "Question 4 of 5",
+            "callout": "In the IaaS model, who is responsible for patching the guest operating system?",
+            "bullets": [
+              "A · The cloud provider",
+              "B · The customer",
+              "C · It is shared equally",
+              "D · No patching is required"
+            ]
+          },
+          "quiz": {
+            "questionId": "kc4",
+            "phase": "read",
+            "question": "In the IaaS model, who is responsible for patching the guest operating system?",
+            "options": [
+              "The cloud provider",
+              "The customer",
+              "It is shared equally",
+              "No patching is required"
+            ],
+            "correctIndex": 1
+          },
+          "visual": "Same layout; progress dots show three filled. A small ghosted thumbnail of the IaaS column from the master diagram sits top-right as a visual cue.",
+          "animation": "Crossfade, type-in, tiles stagger. The thumbnail fades to 30% opacity and holds."
+        },
+        {
+          "id": "s12-11",
+          "startSeconds": 1332,
+          "durationSeconds": 8,
+          "narration": "",
+          "onScreen": {
+            "heading": "Question 4 of 5",
+            "callout": "Take a moment."
+          },
+          "quiz": {
+            "questionId": "kc4",
+            "phase": "think"
+          },
+          "visual": "Held frame with the countdown ring unwinding. Silent.",
+          "animation": "Ring unwinds linearly over 8s."
+        },
+        {
+          "id": "s12-12",
+          "startSeconds": 1340,
+          "durationSeconds": 10,
+          "narration": "B, the customer. In IaaS the provider stops at virtualization — the operating system and everything above it is yours.",
+          "onScreen": {
+            "heading": "Answer: B · The customer",
+            "callout": "In IaaS the provider stops at virtualization. The OS and above is yours."
+          },
+          "quiz": {
+            "questionId": "kc4",
+            "phase": "reveal",
+            "correctIndex": 1,
+            "explanation": "The customer. In IaaS the provider's responsibility stops at virtualization, so the guest operating system and everything above it is yours."
+          },
+          "visual": "Tile B turns green; the rest desaturate. The ghosted IaaS thumbnail brightens to full and its boundary line flashes navy to reinforce where the provider stops.",
+          "animation": "Tile fills green. Thumbnail animates from 30% to 100% opacity over 0.5s, boundary line pulses twice."
+        },
+        {
+          "id": "s12-13",
+          "startSeconds": 1350,
+          "durationSeconds": 20,
+          "narration": "Question five. Which of the six advantages of cloud computing describes replacing large upfront hardware purchases with payment only for what you use? A, go global in minutes. B, trade capital expense for variable expense. C, stop guessing capacity. D, increase speed and agility.",
+          "onScreen": {
+            "heading": "Question 5 of 5",
+            "callout": "Which of the six advantages of cloud computing describes replacing large upfront hardware purchases with payment only for what you use?",
+            "bullets": [
+              "A · Go global in minutes",
+              "B · Trade capital expense for variable expense",
+              "C · Stop guessing capacity",
+              "D · Increase speed and agility"
+            ]
+          },
+          "quiz": {
+            "questionId": "kc5",
+            "phase": "read",
+            "question": "Which of the six advantages of cloud computing describes replacing large upfront hardware purchases with payment only for what you use?",
+            "options": [
+              "Go global in minutes",
+              "Trade capital expense for variable expense",
+              "Stop guessing capacity",
+              "Increase speed and agility"
+            ],
+            "correctIndex": 1
+          },
+          "visual": "Same layout; progress dots show four filled. Answer tiles stack in a single column here because the option text is longer.",
+          "animation": "Crossfade, type-in over 2s, tiles fade in 400ms apart to match the slower read."
+        },
+        {
+          "id": "s12-14",
+          "startSeconds": 1370,
+          "durationSeconds": 7,
+          "narration": "",
+          "onScreen": {
+            "heading": "Question 5 of 5",
+            "callout": "Take a moment."
+          },
+          "quiz": {
+            "questionId": "kc5",
+            "phase": "think"
+          },
+          "visual": "Held frame with the countdown ring unwinding. Silent.",
+          "animation": "Ring unwinds linearly over 7s."
+        },
+        {
+          "id": "s12-15",
+          "startSeconds": 1377,
+          "durationSeconds": 11,
+          "narration": "B, trade capital expense for variable expense. Capital expense becomes operating expense — you stop buying hardware and start paying for consumption.",
+          "onScreen": {
+            "heading": "Answer: B · Trade capital expense for variable expense",
+            "callout": "CapEx becomes OpEx — stop buying hardware, start paying for consumption."
+          },
+          "quiz": {
+            "questionId": "kc5",
+            "phase": "reveal",
+            "correctIndex": 1,
+            "explanation": "Trade capital expense for variable expense. Capital expense becomes operating expense — you stop buying hardware and start paying for what you consume."
+          },
+          "visual": "Tile B turns green; the rest desaturate. The five progress dots all fill, and a small 'Knowledge check complete' label appears beneath them.",
+          "animation": "Tile fills green. Progress dots fill in a quick left-to-right sweep over 0.6s at 8s into the scene."
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "title": "Lesson summary",
+      "startSeconds": 1388,
+      "durationSeconds": 52,
+      "scenes": [
+        {
+          "id": "s13-01",
+          "startSeconds": 1388,
+          "durationSeconds": 17,
+          "narration": "Let's close with what to carry into the exam. Cloud computing is the on-demand delivery of IT resources over the internet with pay-as-you-go pricing.",
+          "onScreen": {
+            "heading": "Lesson summary",
+            "subheading": "Section 13",
+            "callout": "Cloud computing is the on-demand delivery of IT resources over the internet, with pay-as-you-go pricing."
+          },
+          "visual": "Section transition into a clean summary layout. The definition returns in the same navy panel used in section 2 — a deliberate visual rhyme with the opening — sitting across the upper third.",
+          "animation": "Wipe transition. The definition panel rises into place; its three key phrases light in light blue in sequence, 500ms apart, exactly as they did in section 2."
+        },
+        {
+          "id": "s13-02",
+          "startSeconds": 1405,
+          "durationSeconds": 19,
+          "narration": "IaaS gives you the most control and asks the most management. PaaS manages the platform so developers focus on the application. SaaS delivers finished software you simply use.",
+          "onScreen": {
+            "heading": "The three models",
+            "bullets": [
+              "IaaS — most control, most management",
+              "PaaS — the platform is managed; developers focus on the application",
+              "SaaS — ready-to-use software"
+            ]
+          },
+          "visual": "Three colour-coded summary cards across the middle of the frame, each with its model name in large display type, its one-line definition, and a miniature of its column from the master stack diagram.",
+          "animation": "Cards rise into place 600ms apart, each timed to the narration naming its model. Each card's mini-column fills bottom-to-top on arrival in 0.4s."
+        },
+        {
+          "id": "s13-03",
+          "startSeconds": 1424,
+          "durationSeconds": 16,
+          "narration": "And the one question that unlocks every scenario question you'll be asked: who manages what? Thanks for watching — I'll see you in the next lesson.",
+          "onScreen": {
+            "heading": "Take this into the exam",
+            "callout": "Who manages what?",
+            "bullets": [
+              "Next lesson: Regions, Availability Zones and Edge Locations"
+            ]
+          },
+          "visual": "Everything clears to white except the question 'Who manages what?' in large navy display type, centred — closing the loop with section 1 where the same question was introduced. A single line beneath names the next lesson.",
+          "animation": "Cards fade and slide down out of frame over 0.6s. The question scales up slightly from 0.98 and settles in the centre. Next-lesson line fades in at 8s. Frame holds for the final 4s, then fades to white over 1s."
+        }
+      ]
+    }
+  ]
+}

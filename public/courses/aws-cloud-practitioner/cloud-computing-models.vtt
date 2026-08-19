@@ -1,0 +1,313 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:14.000
+Welcome to Cloud Computing Models, part of your AWS Cloud Practitioner certification course. Over the next twenty-four minutes we'll make an abstract topic concrete, practical, and exam-ready.
+
+2
+00:00:14.000 --> 00:00:32.000
+Here's the honest truth about this exam. Cloud computing models come up again and again, and most beginners lose marks not because the ideas are hard, but because nobody ever showed them a clear picture.
+
+3
+00:00:32.000 --> 00:00:52.000
+So that's what we'll build today. One picture, one stack of layers, and a simple question you can ask yourself: who manages what? Answer that, and Infrastructure as a Service, Platform as a Service, and Software as a Service stop being jargon.
+
+4
+00:00:52.000 --> 00:01:08.000
+No prior technical background is needed. If you've ever rented a car, moved into a furnished apartment, or streamed a film, you already understand more about the cloud than you think. Let's begin.
+
+5
+00:01:08.000 --> 00:01:22.000
+Let's start with the definition AWS itself uses, because that's the wording the exam is built around. Read it with me.
+
+6
+00:01:22.000 --> 00:01:39.000
+Cloud computing is the on-demand delivery of IT resources over the internet, with pay-as-you-go pricing. Three ideas are hiding in that one sentence, and each one matters.
+
+7
+00:01:39.000 --> 00:01:57.000
+First: on-demand. You request a server, a database, or storage, and you get it in minutes — no purchase order, no waiting for hardware to arrive on a loading dock.
+
+8
+00:01:57.000 --> 00:02:15.000
+Second: over the internet. The physical machines live in someone else's building — an AWS data center — and you reach them through a browser, a command line, or code.
+
+9
+00:02:15.000 --> 00:02:35.000
+Third: pay-as-you-go. You pay for what you actually use, like electricity. Turn a server off and the meter stops. Nobody bills you for an idle machine sitting in a rack.
+
+10
+00:02:35.000 --> 00:02:58.000
+Here's the everyday version. You don't build a power station to boil a kettle. You plug into a grid somebody else runs, and you pay for the units you consume. Cloud computing is that same idea, applied to computing power.
+
+11
+00:02:58.000 --> 00:03:14.000
+So why did organizations of every size move this way? It comes down to five pressures that traditional IT struggled to answer.
+
+12
+00:03:14.000 --> 00:03:31.000
+Speed. A new project used to wait weeks for hardware to be ordered, delivered, racked and configured. In the cloud, the environment is ready before the kickoff meeting ends.
+
+13
+00:03:31.000 --> 00:03:48.000
+Cost shape. Buying servers is a large payment up front for capacity you hope you'll need. Renting turns that into a smaller, predictable operating expense you can switch off.
+
+14
+00:03:48.000 --> 00:04:05.000
+Elasticity. A retailer's traffic on Black Friday is nothing like a Tuesday in February. Cloud capacity grows and shrinks to follow real demand, automatically.
+
+15
+00:04:05.000 --> 00:04:22.000
+Reach. Opening in a new country used to mean building or renting a data center there. Now it's a configuration choice — pick a region, deploy, done.
+
+16
+00:04:22.000 --> 00:04:38.000
+Focus. Every hour your team spends replacing failed disks is an hour not spent on the product your customers actually pay for.
+
+17
+00:04:38.000 --> 00:04:54.000
+To appreciate what the cloud changed, you need to see clearly what came before it. This is on-premises infrastructure — you own the building, the hardware, and every problem inside it.
+
+18
+00:04:54.000 --> 00:05:14.000
+You buy the servers, the storage arrays and the network gear. You pay for the room, the power, the cooling, the fire suppression and the physical security. And you hire the people who keep it all alive at three in the morning.
+
+19
+00:05:14.000 --> 00:05:32.000
+Then there's the lead time. Specify, get approval, order, wait for delivery, rack, cable, install the operating system, patch it. Six to twelve weeks is normal before a single line of your application runs.
+
+20
+00:05:32.000 --> 00:05:48.000
+But the hardest part is this chart. You must guess your capacity years in advance — and you will be wrong in one of two directions.
+
+21
+00:05:48.000 --> 00:06:03.000
+Guess too high and you've bought machines that sit idle, burning power and depreciating. That's wasted money you can never get back.
+
+22
+00:06:03.000 --> 00:06:18.000
+Guess too low and the site slows down or falls over on your busiest day — the one day the business genuinely could not afford it.
+
+23
+00:06:18.000 --> 00:06:33.000
+None of this makes on-premises wrong. Banks, hospitals and defense organizations still run it for good reasons. It's just expensive, slow to change, and unforgiving of a bad forecast.
+
+24
+00:06:33.000 --> 00:06:46.000
+AWS summarizes the benefits as six advantages of cloud computing. These appear on the exam almost word for word, so let's take them one at a time.
+
+25
+00:06:46.000 --> 00:07:03.000
+One: trade capital expense for variable expense. Instead of a large payment for hardware you might need, you pay only for the computing you consume.
+
+26
+00:07:03.000 --> 00:07:20.000
+Two: benefit from massive economies of scale. Hundreds of thousands of customers share AWS's purchasing power, so the cost per unit is lower than you could ever achieve alone.
+
+27
+00:07:20.000 --> 00:07:37.000
+Three: stop guessing capacity. You no longer have to forecast years ahead and hope you got it right. Scale up when demand arrives, scale down when it leaves, and pay for neither in between.
+
+28
+00:07:37.000 --> 00:07:54.000
+Four: increase speed and agility. Resources that took weeks now take minutes, so experimenting becomes cheap — and cheap experiments are how good products get found.
+
+29
+00:07:54.000 --> 00:08:11.000
+Five: stop spending money running and maintaining data centers. Let racking, stacking and powering servers become somebody else's job, and put your people on work that differentiates you.
+
+30
+00:08:11.000 --> 00:08:28.000
+Six: go global in minutes. Deploy your application into AWS Regions around the world with a few clicks, so customers everywhere get low latency.
+
+31
+00:08:28.000 --> 00:08:44.000
+Now the heart of the lesson. Cloud services come in three models, and they differ in exactly one way: how much of the stack you manage, and how much the provider manages.
+
+32
+00:08:44.000 --> 00:09:02.000
+Here's the stack. Nine layers, from the network cables at the bottom to the application your users touch at the top. On-premises, every single layer is yours.
+
+33
+00:09:02.000 --> 00:09:20.000
+Infrastructure as a Service moves the bottom four to the provider. AWS runs the networking, the storage, the physical servers and the virtualization that carves them into virtual machines.
+
+34
+00:09:20.000 --> 00:09:38.000
+Everything above that line is still yours. You choose the operating system, install it, patch it, configure the middleware, manage the runtime, and look after your data and application.
+
+35
+00:09:38.000 --> 00:09:58.000
+Think of it as renting an empty apartment. The building, the plumbing and the electricity are handled. The furniture, the decorating and the cleaning are entirely up to you.
+
+36
+00:09:58.000 --> 00:10:20.000
+The classic AWS example is Amazon EC2 — Elastic Compute Cloud. You pick a size, pick an operating system image, and a virtual server starts in about a minute. From there, it behaves like a machine you own.
+
+37
+00:10:20.000 --> 00:10:43.000
+So remember this trade: IaaS gives you the most control and the most flexibility of the three models — and in exchange, it asks the most management from you. Control and responsibility always travel together.
+
+38
+00:10:43.000 --> 00:10:58.000
+Platform as a Service raises that line higher. The provider now takes the operating system, the middleware and the runtime as well.
+
+39
+00:10:58.000 --> 00:11:18.000
+That leaves you with just two layers: your data, and your application. You write the code and hand it over; the platform runs it, scales it, and patches everything underneath.
+
+40
+00:11:18.000 --> 00:11:38.000
+Notice what disappears from your job. No operating system updates. No security patches on the server. No capacity planning for the runtime. That work still happens — it just isn't yours.
+
+41
+00:11:38.000 --> 00:12:00.000
+The apartment analogy again: this time it's fully furnished and serviced. Beds are made, the kitchen is stocked, someone else fixes the boiler. You bring your suitcase and start living.
+
+42
+00:12:00.000 --> 00:12:24.000
+On AWS, AWS Elastic Beanstalk is the classic example: upload your application and it provisions the servers, load balancing and scaling for you. AWS Lambda and Amazon RDS sit in the same spirit — you supply code or data, not servers.
+
+43
+00:12:24.000 --> 00:12:48.000
+So the promise of PaaS is focus. Developers spend their time on features and business logic, while the platform is managed for them. You give up some control over the environment — and for most teams, that's a bargain.
+
+44
+00:12:48.000 --> 00:13:03.000
+Software as a Service goes all the way. The provider manages every layer in the stack — including the application itself.
+
+45
+00:13:03.000 --> 00:13:21.000
+You don't install anything, you don't run anything, and you don't patch anything. There is no server for you to log into. You open a browser, sign in, and use finished software that somebody else keeps running.
+
+46
+00:13:21.000 --> 00:13:39.000
+Your only responsibility is your own data and your users — who has an account, what permissions they have, and how you use the product.
+
+47
+00:13:39.000 --> 00:14:00.000
+Back to housing one last time: SaaS isn't renting an apartment at all. It's checking into a hotel. You get a room that's ready now, you use it for as long as you need, and you never think about the boiler.
+
+48
+00:14:00.000 --> 00:14:20.000
+Examples are everywhere, and you almost certainly use several already. Gmail, Salesforce, Dropbox, Zoom, Microsoft 365. On AWS, Amazon WorkSpaces gives you a ready-made desktop, and Amazon Chime gives you ready-made meetings. Nothing to install in either case.
+
+49
+00:14:20.000 --> 00:14:43.000
+The trade-off is the mirror image of IaaS. SaaS asks almost nothing of you operationally, but you take the software as it comes. You can configure it — you can't rebuild it.
+
+50
+00:14:43.000 --> 00:15:01.000
+Let's put all four side by side. This single diagram answers most of the exam questions you will meet on this topic, so it is genuinely worth burning into memory. Take a good look at it.
+
+51
+00:15:01.000 --> 00:15:21.000
+Read it left to right. On-premises: you manage all nine layers. IaaS: five. PaaS: just two. SaaS: none at all. Watch the pattern — as you move right, the blue grows and your workload shrinks.
+
+52
+00:15:21.000 --> 00:15:43.000
+Now read it as two sliders moving in opposite directions. As you move right, your control decreases and the provider's responsibility increases. There is no 'best' model — only the right position on that slider for the job.
+
+53
+00:15:43.000 --> 00:16:05.000
+Here is that same trade-off as a table, and this is the version worth memorising. IaaS: more control, and more management. PaaS: balanced, with less infrastructure management. SaaS: the least infrastructure management of all — simply ready to use.
+
+54
+00:16:05.000 --> 00:16:27.000
+If you prefer analogies, take your pick. IaaS gives you the building blocks. PaaS gives you the workshop. SaaS gives you the finished product. Or in food terms: IaaS is cooking from raw ingredients, PaaS is a meal kit, and SaaS is ordering at a restaurant.
+
+55
+00:16:27.000 --> 00:16:48.000
+Whichever memory hook you choose, the question underneath is always identical: where does the provider's responsibility stop, and where does mine begin? Answer that for any scenario in the exam, and you will pick the right model every time.
+
+56
+00:16:48.000 --> 00:17:06.000
+Examples make this stick, so here are the ones worth knowing. AWS services first, then the everyday tools you already use without thinking of them as cloud models at all. Learn a few from each column.
+
+57
+00:17:06.000 --> 00:17:27.000
+IaaS: Amazon EC2 for virtual servers, Amazon EBS for block storage, Amazon VPC for networking. Outside AWS, think of a rented virtual private server where you install everything yourself.
+
+58
+00:17:27.000 --> 00:17:48.000
+PaaS: AWS Elastic Beanstalk, AWS Lambda, Amazon RDS, and AWS Fargate. Outside AWS, Heroku and Google App Engine follow exactly the same pattern. In every one of them the deal is identical — you deploy code, and somebody else deals with the servers.
+
+59
+00:17:48.000 --> 00:18:09.000
+SaaS: Amazon WorkSpaces, Amazon Chime and Amazon QuickSight. Outside AWS, Gmail, Salesforce, Slack, Zoom and Dropbox. Here is a quick test you can apply to anything: if you just sign in and start using it, it is SaaS.
+
+60
+00:18:09.000 --> 00:18:28.000
+One caution for the exam: services don't always sit neatly in one box. Amazon RDS is often called PaaS because AWS manages the database engine for you — the principle matters more than the label.
+
+61
+00:18:28.000 --> 00:18:44.000
+So when should you choose each one? Here is a practical guide, framed as the questions a real team actually asks itself before starting a project. Three cards, three decisions.
+
+62
+00:18:44.000 --> 00:19:08.000
+Choose IaaS when you need control. A specific operating system version, custom networking, licensed software with strict requirements, or a legacy application being lifted from your own data center without redesign. You accept the management burden because the requirement demands it.
+
+63
+00:19:08.000 --> 00:19:32.000
+Choose PaaS when you want to ship software fast. A start-up building a web application, a team that has no dedicated operations staff, or any project where server maintenance adds no value to the customer.
+
+64
+00:19:32.000 --> 00:19:56.000
+Choose SaaS when the problem is already solved. Email, video calls, customer relationship management, payroll, file sharing. Building your own version of these is almost never a good use of engineering time.
+
+65
+00:19:56.000 --> 00:20:18.000
+And in the real world you'll use all three at once — SaaS for email, PaaS for the product your developers build, IaaS for the one stubborn legacy system that isn't ready to move.
+
+66
+00:20:18.000 --> 00:20:33.000
+Question one. Which cloud computing model gives the customer the most control over the underlying infrastructure? Is it A, SaaS. B, PaaS. C, IaaS. Or D, all three provide equal control.
+
+67
+00:20:41.000 --> 00:20:52.000
+The answer is C, IaaS. You manage the operating system and everything above it — the most control, and the most responsibility.
+
+68
+00:20:52.000 --> 00:21:07.000
+Question two. A small development team wants to deploy a web application without managing servers, patching operating systems, or configuring scaling. Which model fits best? A, IaaS. B, PaaS. C, SaaS. D, on-premises.
+
+69
+00:21:15.000 --> 00:21:26.000
+B, PaaS. The platform is managed for you, so the developers focus purely on the application, not on the servers underneath it.
+
+70
+00:21:26.000 --> 00:21:39.000
+Question three. Gmail, Salesforce and Dropbox are examples of which model? A, IaaS. B, PaaS. C, SaaS. D, a mix of IaaS and PaaS.
+
+71
+00:21:47.000 --> 00:21:58.000
+C, SaaS. Ready-to-use software, delivered over the internet, with nothing for you to install or maintain.
+
+72
+00:21:58.000 --> 00:22:12.000
+Question four. In the IaaS model, who is responsible for patching the guest operating system? A, the cloud provider. B, the customer. C, it's shared equally. D, no patching is required.
+
+73
+00:22:20.000 --> 00:22:30.000
+B, the customer. In IaaS the provider stops at virtualization — the operating system and everything above it is yours.
+
+74
+00:22:30.000 --> 00:22:50.000
+Question five. Which of the six advantages of cloud computing describes replacing large upfront hardware purchases with payment only for what you use? A, go global in minutes. B, trade capital expense for variable expense. C, stop guessing capacity. D, increase speed and agility.
+
+75
+00:22:57.000 --> 00:23:08.000
+B, trade capital expense for variable expense. Capital expense becomes operating expense — you stop buying hardware and start paying for consumption.
+
+76
+00:23:08.000 --> 00:23:25.000
+Let's close with what to carry into the exam. Cloud computing is the on-demand delivery of IT resources over the internet with pay-as-you-go pricing.
+
+77
+00:23:25.000 --> 00:23:44.000
+IaaS gives you the most control and asks the most management. PaaS manages the platform so developers focus on the application. SaaS delivers finished software you simply use.
+
+78
+00:23:44.000 --> 00:24:00.000
+And the one question that unlocks every scenario question you'll be asked: who manages what? Thanks for watching — I'll see you in the next lesson.

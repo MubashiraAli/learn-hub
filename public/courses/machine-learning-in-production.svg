@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d9488"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  <circle cx="400" cy="225" r="60" fill="none" stroke="white" stroke-width="8" opacity="0.15"/>
+  <circle cx="400" cy="225" r="45" fill="none" stroke="white" stroke-width="6" opacity="0.12"/>
+  <circle cx="400" cy="225" r="30" fill="white" opacity="0.1"/>
+  <rect x="150" y="150" width="100" height="100" rx="8" fill="white" opacity="0.12"/>
+  <rect x="550" y="200" width="100" height="100" rx="8" fill="white" opacity="0.12"/>
+  <path d="M250 200 L350 225 M450 225 L550 250" stroke="white" stroke-width="2" opacity="0.15"/>
+  <circle cx="300" cy="100" r="15" fill="white" opacity="0.18"/>
+  <circle cx="500" cy="100" r="15" fill="white" opacity="0.18"/>
+  <circle cx="300" cy="350" r="15" fill="white" opacity="0.18"/>
+  <circle cx="500" cy="350" r="15" fill="white" opacity="0.18"/>
+  <path d="M300 115 L400 195 M500 115 L400 195 M300 335 L400 255 M500 335 L400 255" stroke="white" stroke-width="1.5" opacity="0.12"/>
+  <path d="M100 380 L130 350 L160 380 L190 350 L220 380" stroke="white" stroke-width="2" fill="none" opacity="0.1"/>
+  <path d="M580 80 L610 50 L640 80 L670 50 L700 80" stroke="white" stroke-width="2" fill="none" opacity="0.1"/>
+  <circle cx="150" cy="300" r="8" fill="white" opacity="0.15"/>
+  <circle cx="650" cy="150" r="8" fill="white" opacity="0.15"/>
+</svg>
