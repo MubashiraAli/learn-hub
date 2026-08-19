@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAllCourses, getCourseById } from "@/lib/courses";
+import { getCourseById } from "@/lib/courses";
 import { LearnPlayer } from "@/components/LearnPlayer";
 
 interface LearnPageProps {
   params: Promise<{ courseId: string }>;
   searchParams: Promise<{ lesson?: string | string[] }>;
-}
-
-export async function generateStaticParams() {
-  const courses = await getAllCourses();
-  return courses.map((course) => ({ courseId: course.id }));
 }
 
 export async function generateMetadata({

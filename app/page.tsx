@@ -19,6 +19,11 @@ import {
   buttonVariants,
 } from "@/components/ui";
 
+// Rendered on demand. The catalog is editable from /admin, so pages must
+// reflect the current database rather than a build-time snapshot — and the
+// build then needs no database connection at all.
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const [courses, catalog, categoryCounts] = await Promise.all([
     getAllCourses(),

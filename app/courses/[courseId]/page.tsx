@@ -19,11 +19,7 @@ import {
   Users,
 } from "lucide-react";
 import { getTotalDurationMinutes, getTotalLessons } from "@/data/courses";
-import {
-  getAllCourses,
-  getCourseById,
-  getRelatedCourses,
-} from "@/lib/courses";
+import { getCourseById, getRelatedCourses } from "@/lib/courses";
 import { getInstructorById } from "@/data/instructors";
 import { getCategoryLabel } from "@/data/categories";
 import { getReviewsForCourse } from "@/data/reviews";
@@ -65,10 +61,10 @@ function getModuleDurationMinutes(module: Module): number {
   );
 }
 
-export async function generateStaticParams() {
-  const courses = await getAllCourses();
-  return courses.map((course) => ({ courseId: course.id }));
-}
+// Rendered on demand. The catalog is editable from /admin, so pages must
+// reflect the current database rather than a build-time snapshot — and the
+// build then needs no database connection at all.
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
