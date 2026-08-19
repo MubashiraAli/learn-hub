@@ -16,14 +16,37 @@ function createClient(): PrismaClient {
   });
 }
 
-// Next.js hot-reloads modules in development; without a global cache every
-// reload would open a new pool and exhaust Postgres connections.
+// Cached on globalThis so Next.js hot reloads in development reuse one pool
+// instead of opening a new one per reload, and so warm serverless instances
+// reuse their client across invocations.
 const globalForPrisma = globalThis as unknown as {
   prisma?: PrismaClient;
 };
 
-export const prisma: PrismaClient = globalForPrisma.prisma ?? createClient();
-
-if (process.env.NODE_ENV !== "production") {
-  globalForPrisma.prisma = prisma;
+function getClient(): PrismaClient {
+  if (!globalForPrisma.prisma) {
+    globalForPrisma.prisma = createClient();
+  }
+  return globalForPrisma.prisma;
 }
+
+/**
+ * Connects lazily: the client is built on first use, not on import.
+ *
+ * `next build` imports every route to collect its configuration. Constructing
+ * eagerly meant a build with no DATABASE_URL — which is the normal state on a
+ * hosted builder before env vars are read, and on any CI that only type-checks
+ * — died at import time. Deferring means a missing connection string surfaces
+ * as a runtime error on the request that actually needs the database, with the
+ * same message as before.
+ */
+export const prisma: PrismaClient = new Proxy({} as PrismaClient, {
+  get(_target, property, receiver) {
+    const client = getClient();
+    const value = Reflect.get(client, property, receiver);
+    return typeof value === "function" ? value.bind(client) : value;
+  },
+  has(_target, property) {
+    return property in getClient();
+  },
+});

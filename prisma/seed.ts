@@ -14,7 +14,14 @@ import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { courses } from "../data/courses";
 
-process.loadEnvFile?.(".env");
+// Load .env when running locally. Hosted builds (Vercel, Railway, CI) inject
+// environment variables directly and have no .env file, so a missing file is
+// expected rather than an error.
+try {
+  process.loadEnvFile?.(".env");
+} catch {
+  // no .env on disk — fall through to the real environment
+}
 
 const connectionString = process.env.DATABASE_URL;
 if (!connectionString) {
