@@ -108,6 +108,7 @@ function toLessonDTO(
     type: row.type as LessonType,
     description: row.description,
     resources: row.resources.map(toResourceDTO),
+    videoUrl: row.videoUrl ?? undefined,
   };
 }
 

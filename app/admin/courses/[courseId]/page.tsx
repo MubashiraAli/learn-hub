@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Plus } from "lucide-react";
+import { Plus, Video } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { requireAdminPage } from "@/lib/admin";
 import { courseCategories } from "@/data/categories";
@@ -29,6 +29,7 @@ import {
   updateCourse,
   updateLesson,
   updateModule,
+  setLessonVideo,
   updateQuestion,
   upsertQuiz,
 } from "../../actions";
@@ -352,6 +353,11 @@ export default async function AdminCourseDetailPage({
                           <span className="pb-2.5 font-mono text-xs text-zinc-400">
                             {lesson.slug}
                           </span>
+                          {lesson.videoUrl ? (
+                            <span className="pb-2.5">
+                              <Badge variant="success">video</Badge>
+                            </span>
+                          ) : null}
                           <div className="min-w-[12rem] flex-1">
                             <Label htmlFor={`lesson-title-${lesson.id}`}>
                               Title
@@ -399,6 +405,19 @@ export default async function AdminCourseDetailPage({
                             name="description"
                             value={lesson.description}
                           />
+                          <div className="w-full">
+                            <Label htmlFor={`lesson-video-${lesson.id}`}>
+                              Video URL
+                            </Label>
+                            <Input
+                              id={`lesson-video-${lesson.id}`}
+                              name="videoUrl"
+                              type="url"
+                              defaultValue={lesson.videoUrl ?? ""}
+                              placeholder="YouTube/Vimeo link, or a direct .mp4 URL"
+                              className="mt-1"
+                            />
+                          </div>
                           <Button type="submit" variant="outline" size="sm">
                             Save
                           </Button>
@@ -458,6 +477,18 @@ export default async function AdminCourseDetailPage({
                       className="mt-1"
                     />
                   </div>
+                  <div className="w-full">
+                    <Label htmlFor={`new-lesson-video-${module.id}`}>
+                      Video URL (optional)
+                    </Label>
+                    <Input
+                      id={`new-lesson-video-${module.id}`}
+                      name="videoUrl"
+                      type="url"
+                      placeholder="YouTube/Vimeo link, or a direct .mp4 URL"
+                      className="mt-1"
+                    />
+                  </div>
                   <Button type="submit" size="sm">
                     <Plus className="h-3.5 w-3.5" aria-hidden />
                     Add lesson
@@ -486,6 +517,71 @@ export default async function AdminCourseDetailPage({
                 Add module
               </Button>
             </ActionForm>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* ── Lesson videos ─────────────────────────────────────────── */}
+      <Card>
+        <CardHeader>
+          <CardTitle>
+            <span className="inline-flex items-center gap-2">
+              <Video className="h-4 w-4 text-indigo-500" aria-hidden />
+              Lesson videos
+            </span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="border-t border-zinc-100 pt-5 dark:border-zinc-800">
+            <p className="mb-4 text-sm text-zinc-500 dark:text-zinc-400">
+              Paste a YouTube or Vimeo link, a direct <code>.mp4</code> URL, or a
+              path under <code>/public</code>. Leave blank to remove a video.
+            </p>
+
+            {lessonCount === 0 ? (
+              <p className="text-sm text-zinc-400">
+                Add a module and some lessons first.
+              </p>
+            ) : (
+              <ul className="space-y-3">
+                {course.modules.map((module) =>
+                  module.lessons.map((lesson) => (
+                    <li
+                      key={lesson.id}
+                      className="rounded-lg border border-zinc-200 p-3 dark:border-zinc-800"
+                    >
+                      <ActionForm action={setLessonVideo} successLabel="Video saved.">
+                        <input type="hidden" name="id" value={lesson.id} />
+                        <div className="flex flex-wrap items-end gap-3">
+                          <div className="min-w-[16rem] flex-1">
+                            <Label htmlFor={`video-${lesson.id}`}>
+                              <span className="font-mono text-xs text-zinc-400">
+                                {module.slug}/{lesson.slug}
+                              </span>{" "}
+                              {lesson.title}
+                            </Label>
+                            <Input
+                              id={`video-${lesson.id}`}
+                              name="videoUrl"
+                              type="url"
+                              defaultValue={lesson.videoUrl ?? ""}
+                              placeholder="https://www.youtube.com/watch?v=..."
+                              className="mt-1.5"
+                            />
+                          </div>
+                          <Badge variant={lesson.videoUrl ? "success" : "outline"}>
+                            {lesson.videoUrl ? "has video" : "no video"}
+                          </Badge>
+                          <Button type="submit" variant="outline" size="sm">
+                            Save
+                          </Button>
+                        </div>
+                      </ActionForm>
+                    </li>
+                  )),
+                )}
+              </ul>
+            )}
           </div>
         </CardContent>
       </Card>

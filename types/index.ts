@@ -53,6 +53,12 @@ export interface Lesson {
   description: string;
   resources: LessonResource[];
   content?: LessonContent;
+  /**
+   * Where the lesson video lives. Either a direct media file (.mp4/.webm) or a
+   * YouTube/Vimeo link, which the player converts to an embed. Empty means no
+   * video has been attached yet.
+   */
+  videoUrl?: string;
 }
 
 export interface Module {

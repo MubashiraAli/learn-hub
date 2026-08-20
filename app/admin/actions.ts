@@ -23,6 +23,12 @@ function num(form: FormData, key: string, fallback = 0): number {
   return Number.isFinite(parsed) ? parsed : fallback;
 }
 
+/** undefined when the field was not submitted at all, trimmed string if it was. */
+function optionalString(form: FormData, key: string): string | undefined {
+  const value = form.get(key);
+  return typeof value === "string" ? value.trim() : undefined;
+}
+
 function list(form: FormData, key: string): string[] {
   return str(form, key)
     .split(/[\n,]/)
@@ -235,6 +241,7 @@ export async function createLesson(form: FormData): Promise<ActionResult> {
       description: str(form, "description"),
       type: str(form, "type") || "video",
       durationMinutes: num(form, "durationMinutes", 10),
+      videoUrl: str(form, "videoUrl") || null,
       position: parent.lessons.length,
     },
   });
@@ -250,6 +257,8 @@ export async function updateLesson(form: FormData): Promise<ActionResult> {
   if (!id) return { ok: false, error: "Missing lesson id." };
   if (!title) return { ok: false, error: "Lesson title is required." };
 
+  const videoUrl = optionalString(form, "videoUrl");
+
   const updated = await prisma.lesson.update({
     where: { id },
     data: {
@@ -257,6 +266,8 @@ export async function updateLesson(form: FormData): Promise<ActionResult> {
       description: str(form, "description"),
       type: str(form, "type") || "video",
       durationMinutes: num(form, "durationMinutes", 10),
+      // Absent field = leave as-is; present but empty = clear it.
+      ...(videoUrl === undefined ? {} : { videoUrl: videoUrl || null }),
     },
     select: { module: { select: { courseId: true } } },
   });
@@ -276,6 +287,48 @@ export async function deleteLesson(form: FormData): Promise<ActionResult> {
   });
 
   refresh(removed.module.courseId);
+  return { ok: true };
+}
+
+/**
+ * Sets or clears just the video on one lesson. Separate from updateLesson so
+ * the video screen does not have to resubmit title, type and duration (and so
+ * cannot accidentally overwrite them).
+ */
+export async function setLessonVideo(form: FormData): Promise<ActionResult> {
+  await assertAdmin();
+  const id = str(form, "id");
+  if (!id) return { ok: false, error: "Missing lesson id." };
+
+  const raw = str(form, "videoUrl");
+
+  if (raw) {
+    // Reject anything that is not a URL early, with a message that says why.
+    let parsed: URL | undefined;
+    if (raw.startsWith("/")) {
+      // A path under /public is fine.
+    } else {
+      try {
+        parsed = new URL(raw);
+      } catch {
+        return {
+          ok: false,
+          error: "Enter a full URL (https://...) or a path starting with /.",
+        };
+      }
+      if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+        return { ok: false, error: "The URL must start with http:// or https://." };
+      }
+    }
+  }
+
+  const updated = await prisma.lesson.update({
+    where: { id },
+    data: { videoUrl: raw || null },
+    select: { module: { select: { courseId: true } } },
+  });
+
+  refresh(updated.module.courseId);
   return { ok: true };
 }
 

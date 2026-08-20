@@ -15,11 +15,8 @@ import {
   Code2,
   FileText,
   Link2,
-  Maximize,
-  Pause,
   Play,
   StickyNote,
-  Volume2,
 } from "lucide-react";
 import type { Course, Lesson, LessonResourceKind } from "@/types";
 import { getCategoryLabel } from "@/data/categories";
@@ -28,6 +25,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { cn } from "@/lib/utils";
 import { Badge, Button, Card, Drawer, Progress, StorageWarning } from "@/components/ui";
 import { CourseThumbnail } from "@/components/CourseThumbnail";
+import { resolveVideoSource } from "@/lib/video";
 
 const resourceIcons: Record<
   LessonResourceKind,
@@ -128,6 +126,14 @@ function CurriculumList({
   );
 }
 
+/**
+ * Plays the lesson's video when one is attached.
+ *
+ * Replaces a non-functional mock (a static thumbnail, a play button wired to
+ * nothing, and a progress bar hardcoded to one third). Lessons with no
+ * videoUrl keep a thumbnail, but it now says so rather than pretending to be
+ * a player.
+ */
 function VideoPlayer({
   course,
   lesson,
@@ -135,43 +141,54 @@ function VideoPlayer({
   course: Course;
   lesson: Lesson;
 }) {
+  const source = resolveVideoSource(lesson.videoUrl);
+
+  if (source.kind === "file") {
+    return (
+      <div className="relative aspect-video overflow-hidden rounded-xl bg-black">
+        <video
+          key={source.src}
+          className="h-full w-full"
+          src={source.src}
+          controls
+          controlsList="nodownload"
+          preload="metadata"
+          playsInline
+        />
+      </div>
+    );
+  }
+
+  if (source.kind === "embed") {
+    return (
+      <div className="relative aspect-video overflow-hidden rounded-xl bg-black">
+        <iframe
+          key={source.src}
+          className="absolute inset-0 h-full w-full"
+          src={source.src}
+          title={lesson.title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+          allowFullScreen
+          referrerPolicy="strict-origin-when-cross-origin"
+        />
+      </div>
+    );
+  }
+
+  // No video attached yet.
   return (
     <div className="relative aspect-video overflow-hidden rounded-xl bg-zinc-950">
       <CourseThumbnail course={course} className="opacity-40" />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <button
-          type="button"
-          aria-label="Play lesson"
-          className="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-zinc-900 shadow-lg transition hover:scale-105 hover:bg-white"
-        >
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-center">
+        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/10 text-white/70">
           <Play className="ml-0.5 h-7 w-7 fill-current" aria-hidden />
-        </button>
-      </div>
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-        <div className="flex items-center gap-3 text-white">
-          <button type="button" aria-label="Pause" className="transition hover:text-zinc-300">
-            <Pause className="h-4 w-4 fill-current" aria-hidden />
-          </button>
-          <button type="button" aria-label="Mute" className="transition hover:text-zinc-300">
-            <Volume2 className="h-4 w-4" aria-hidden />
-          </button>
-          <div
-            className="h-1 flex-1 overflow-hidden rounded-full bg-white/30"
-            aria-hidden
-          >
-            <div className="h-full w-1/3 rounded-full bg-white" />
-          </div>
-          <span className="text-xs tabular-nums text-zinc-200">
-            0:00 / {formatTime(lesson.durationMinutes)}
-          </span>
-          <button
-            type="button"
-            aria-label="Fullscreen"
-            className="transition hover:text-zinc-300"
-          >
-            <Maximize className="h-4 w-4" aria-hidden />
-          </button>
-        </div>
+        </span>
+        <p className="px-6 text-sm text-zinc-300">
+          No video for this lesson yet.
+        </p>
+        <p className="text-xs text-zinc-500">
+          {formatTime(lesson.durationMinutes)} planned
+        </p>
       </div>
     </div>
   );
